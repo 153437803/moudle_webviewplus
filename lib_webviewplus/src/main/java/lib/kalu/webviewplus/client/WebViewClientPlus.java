@@ -119,7 +119,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         String mimeType = FileUtil.getMimeType(filename);
 
         // 未发现mimeType, 即未网络请求
-        if (null == mimeType || mimeType.length() == 0) {
+        if (null == mimeType || mimeType.length() == 0 || mimeType.equals("application/json;charset=utf-8") || mimeType.startsWith("application/json;")) {
 
             Log.d("WebViewClientPlus", "loadWebResource[缓存-接口] => mimeType = " + mimeType + ", url = " + url);
             WebResourceResponse webResourceResponse = super.shouldInterceptRequest(view, url);
