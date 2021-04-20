@@ -1,0 +1,119 @@
+apply plugin: rootProject.ext.plugin.com_android_application
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    compileOptions.encoding = rootProject.ext.android.compileOptionsEncoding
+    ndkPath rootProject.ext.android.ndkPath
+    ndkVersion rootProject.ext.android.ndkVersion
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        vectorDrawables.useSupportLibrary = true
+
+        ndk {
+            abiFilters rootProject.ext.android.abiFilters.split(",")
+        }
+
+        //添加此行
+        flavorDimensions "default"
+    }
+
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                variant.productFlavors.each { flavor ->
+                    def channel = new String(flavor.name).toLowerCase()
+                    def version = new String(flavor.versionName).toLowerCase()
+                    def type = new String(buildType.name).toLowerCase()
+                    def time = new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08"))
+                    outputFileName = "frame_" + channel + "_" + type + "_v" + version + "_" + time + ".apk"
+                }
+            }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("test.jks")
+            storePassword "123456"
+            keyAlias "test"
+            keyPassword "123456"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        release {
+            storeFile file("test.jks")
+            storePassword "123456"
+            keyAlias "test"
+            keyPassword "123456"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            useProguard true
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            multiDexEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard/proguard-rules.pro'
+        }
+        debug {
+            useProguard true
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            multiDexEnabled true
+            signingConfig signingConfigs.debug
+            // ext.alwaysUpdateBuildId = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard/proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    sourceSets.main {
+        jni.srcDirs = []
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // 模块依赖
+    implementation project(':lib_webviewplus')
+//    implementation(name: 'webviewplus_release_20210420', ext: 'aar')
+
+    // 三方依赖
+    implementation rootProject.ext.dependencies.support_activity
+    implementation rootProject.ext.dependencies.support_fragment
+    implementation rootProject.ext.dependencies.support_annotation
+    implementation rootProject.ext.dependencies.support_appcompat
+    implementation rootProject.ext.dependencies.support_coordinatorlayout
+    implementation rootProject.ext.dependencies.support_constraintlayout
+}
