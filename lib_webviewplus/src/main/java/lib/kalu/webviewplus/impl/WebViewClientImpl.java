@@ -33,7 +33,7 @@ public interface WebViewClientImpl extends WebViewClientLoaderImpl {
             Context context = webView.getContext().getApplicationContext();
             int heightPixels = context.getResources().getDisplayMetrics().heightPixels;
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("file:///android_asset/default.html?height=");
+            stringBuilder.append("file:///android_asset/netError.html?height=");
             stringBuilder.append(heightPixels * 0.3f);
 
             // 网络错误, 加载本地Html
