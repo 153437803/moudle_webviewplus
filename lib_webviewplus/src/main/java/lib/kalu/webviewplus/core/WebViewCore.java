@@ -1,9 +1,12 @@
 package lib.kalu.webviewplus.core;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -18,6 +21,7 @@ import lib.kalu.webviewplus.client.WebViewClientPlus;
 import lib.kalu.webviewplus.impl.WebViewImpl;
 import lib.kalu.webviewplus.util.FileUtil;
 import lib.kalu.webviewplus.util.JavascriptUtil;
+import lib.kalu.webviewplus.util.LogUtil;
 
 /**
  * description:
@@ -78,6 +82,18 @@ public class WebViewCore extends WebView implements WebViewImpl {
     /**********/
 
     @Override
+    public void onPause() {
+        super.onPause();
+        pauseTimers();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        resumeTimers();
+    }
+
+    @Override
     public void loadUrl(String url) {
         if (null == url || url.length() == 0)
             return;
@@ -107,10 +123,22 @@ public class WebViewCore extends WebView implements WebViewImpl {
 
     /**********/
 
+    @SuppressLint("JavascriptInterface")
     @Override
     public void initConfig(@NonNull WebView webView) {
 
         if (null != webView) {
+
+            webView.setLongClickable(false);
+            webView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    return true;
+                }
+            });
+
+            webView.removeJavascriptInterface(initJavascriptInterface());
+            webView.addJavascriptInterface(WebViewCore.this, initJavascriptInterface());
 
             // fix h5网页视频有声音没图像
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -214,6 +242,18 @@ public class WebViewCore extends WebView implements WebViewImpl {
 
             });
         }
+    }
+
+    @JavascriptInterface
+    @Override
+    public void reload() {
+        LogUtil.log("WebViewCore", "refresh =>");
+        post(new Runnable() {
+            @Override
+            public void run() {
+                WebViewCore.super.reload();
+            }
+        });
     }
 
     @Override
