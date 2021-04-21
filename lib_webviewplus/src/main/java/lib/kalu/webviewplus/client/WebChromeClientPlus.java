@@ -9,6 +9,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import lib.kalu.webviewplus.impl.WebChromeClientImpl;
+import lib.kalu.webviewplus.impl.WebViewImpl;
 
 /**
  * description:
@@ -57,6 +58,15 @@ public class WebChromeClientPlus extends WebChromeClient implements WebChromeCli
     @Override
     public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
         return super.onJsConfirm(view, url, message, result);
+    }
+
+    @Override
+    public void onProgressChanged(WebView view, int newProgress) {
+        super.onProgressChanged(view, newProgress);
+        if (null != view && view instanceof WebViewImpl) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onProgressChanged(view, newProgress);
+        }
     }
 
     @Override

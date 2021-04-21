@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import lib.kalu.webviewplus.client.WebChromeClientPlus;
 import lib.kalu.webviewplus.client.WebViewClientPlus;
 import lib.kalu.webviewplus.impl.WebViewImpl;
+import lib.kalu.webviewplus.util.LogUtil;
 
 /**
  * description:
@@ -162,7 +163,7 @@ public class WebViewCore extends WebView implements WebViewImpl {
 
         if (null != webView) {
 
-            webView.setWebViewClient(new WebViewClientPlus(){
+            webView.setWebViewClient(new WebViewClientPlus() {
 
             });
         }
@@ -173,9 +174,14 @@ public class WebViewCore extends WebView implements WebViewImpl {
 
         if (null != webView) {
 
-            webView.setWebChromeClient(new WebChromeClientPlus(){
+            webView.setWebChromeClient(new WebChromeClientPlus() {
 
             });
         }
+    }
+
+    @Override
+    public void onProgressChanged(@NonNull WebView view, int newProgress) {
+        LogUtil.log("WebViewCore", "onProgressChanged => newProgress = " + newProgress);
     }
 }
