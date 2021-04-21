@@ -3,7 +3,6 @@ package lib.kalu.webviewplus.core;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -257,14 +256,15 @@ public class WebViewCore extends WebView implements WebViewImpl {
     }
 
     @Override
-    public void loadJavascriptAssets(@NonNull Context context, @NonNull String fliename) {
-        String js = FileUtil.readAssets(context, fliename);
-        loadJavascript(js);
+    public void loadJavascriptAssets(@NonNull String fliename) {
+        Context context = getContext().getApplicationContext();
+        String jstring = FileUtil.readAssets(context, fliename);
+        loadJavascriptString(jstring);
     }
 
     @Override
-    public void loadJavascript(@NonNull String js) {
-        String javascript = JavascriptUtil.encode(js);
+    public void loadJavascriptString(@NonNull String jstring) {
+        String javascript = JavascriptUtil.encode(jstring);
         loadDataWithBaseURL(null, javascript, "application/javascript", "utf-8", null);
     }
 

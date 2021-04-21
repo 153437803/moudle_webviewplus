@@ -28,9 +28,9 @@ public interface WebViewImpl {
 
     /*****/
 
-    void loadJavascriptAssets(@NonNull Context context, @NonNull String fliename);
+    void loadJavascriptAssets(@NonNull String fliename);
 
-    void loadJavascript(@NonNull String js);
+    void loadJavascriptString(@NonNull String jstring);
 
     void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, @IntRange(from = 0, to = 100) int newProgress);
 }
