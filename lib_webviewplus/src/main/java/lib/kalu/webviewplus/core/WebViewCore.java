@@ -8,12 +8,15 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import java.net.URLEncoder;
+import java.util.Map;
 
 import lib.kalu.webviewplus.client.WebChromeClientPlus;
 import lib.kalu.webviewplus.client.WebViewClientPlus;
 import lib.kalu.webviewplus.impl.WebViewImpl;
+import lib.kalu.webviewplus.util.FileUtil;
+import lib.kalu.webviewplus.util.JavascriptUtil;
 
 /**
  * description:
@@ -70,6 +73,38 @@ public class WebViewCore extends WebView implements WebViewImpl {
         initWebViewClient(this);
         initWebChromeClient(this);
     }
+
+    /**********/
+
+    @Override
+    public void loadUrl(String url) {
+        if (null == url || url.length() == 0)
+            return;
+        super.loadUrl(url);
+    }
+
+    @Override
+    public void loadUrl(String url, Map<String, String> additionalHttpHeaders) {
+        if (null == url || url.length() == 0)
+            return;
+        super.loadUrl(url, additionalHttpHeaders);
+    }
+
+    @Override
+    public void loadData(String data, @Nullable String mimeType, @Nullable String encoding) {
+        if (null == data || data.length() == 0)
+            return;
+        super.loadData(data, mimeType, encoding);
+    }
+
+    @Override
+    public void loadDataWithBaseURL(@Nullable String baseUrl, String data, @Nullable String mimeType, @Nullable String encoding, @Nullable String historyUrl) {
+        if (null == data || data.length() == 0)
+            return;
+        super.loadDataWithBaseURL(baseUrl, data, mimeType, encoding, historyUrl);
+    }
+
+    /**********/
 
     @Override
     public void initConfig(@NonNull WebView webView) {
@@ -182,16 +217,18 @@ public class WebViewCore extends WebView implements WebViewImpl {
     }
 
     @Override
+    public void loadJavascriptAssets(@NonNull Context context, @NonNull String fliename) {
+        String js = FileUtil.readAssets(context, fliename);
+        loadJavascript(js);
+    }
+
+    @Override
     public void loadJavascript(@NonNull String js) {
-        try {
-            String javascript = URLEncoder.encode(js, "utf-8");
-            loadDataWithBaseURL(null, javascript, "application/javascript", "utf-8", null);
-        } catch (Exception e) {
-        }
+        String javascript = JavascriptUtil.encode(js);
+        loadDataWithBaseURL(null, javascript, "application/javascript", "utf-8", null);
     }
 
     @Override
     public void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress) {
-
     }
 }
