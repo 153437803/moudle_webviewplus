@@ -1,7 +1,6 @@
 package lib.kalu.webviewplus.client;
 
 import android.net.http.SslError;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceError;
@@ -17,6 +16,7 @@ import java.io.File;
 
 import lib.kalu.webviewplus.impl.WebViewClientImpl;
 import lib.kalu.webviewplus.util.FileUtil;
+import lib.kalu.webviewplus.util.LogUtil;
 import lib.kalu.webviewplus.util.MD5Util;
 
 /**
@@ -59,7 +59,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         // super.onReceivedError(view, errorCode, description, failingUrl);
-        Log.e("WebViewClientPlus", "onReceivedError1 => errorCode = " + errorCode + ", description" + description);
+        LogUtil.log("WebViewClientPlus", "onReceivedError1 => errorCode = " + errorCode + ", description" + description);
 
         // 加载错误本地静态资源
         loadResourceFail(view);
@@ -68,7 +68,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Override
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         // super.onReceivedError(view, request, error);
-        Log.e("WebViewClientPlus", "onReceivedError2 => errorCode = " + error.getErrorCode() + ", description" + error.getDescription());
+        LogUtil.log("WebViewClientPlus", "onReceivedError2 => errorCode = " + error.getErrorCode() + ", description" + error.getDescription());
 
         // 加载错误本地静态资源
         loadResourceFail(view);
@@ -77,7 +77,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Override
     public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
         super.onReceivedHttpError(view, request, errorResponse);
-        Log.e("WebViewClientPlus", "onReceivedError3 => statusCode = " + errorResponse.getStatusCode());
+        LogUtil.log("WebViewClientPlus", "onReceivedError3 => statusCode = " + errorResponse.getStatusCode());
     }
 
     @Override
@@ -119,7 +119,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         // 未发现mimeType, 即未网络请求
         if (null == mimeType || mimeType.length() == 0 || mimeType.equals("application/json;charset=utf-8") || mimeType.startsWith("application/json;")) {
 
-            Log.d("WebViewClientPlus", "loadWebResource[缓存-接口] => mimeType = " + mimeType + ", url = " + url);
+            LogUtil.log("WebViewClientPlus", "loadWebResource[缓存-接口数据] => mimeType = " + mimeType + ", url = " + url);
             WebResourceResponse webResourceResponse = super.shouldInterceptRequest(view, url);
             return webResourceResponse;
         }
@@ -131,14 +131,14 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
             // 解析失败, 当次不在进行缓存策略
             if (null == webResourceResponse) {
 
-                Log.d("WebViewClientPlus", "loadWebResource[缓存-解析失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
+                LogUtil.log("WebViewClientPlus", "loadWebResource[缓存-解析失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
                 file.delete();
                 return super.shouldInterceptRequest(view, url);
             }
             // 解析成功
             else {
 
-                Log.d("WebViewClientPlus", "loadWebResource[缓存-解析成功] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
+                LogUtil.log("WebViewClientPlus", "loadWebResource[缓存-解析成功] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
                 return webResourceResponse;
             }
         }
@@ -149,11 +149,11 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
             boolean status = downloadResoruce(url, file.getAbsolutePath());
 
             if (status) {
-                Log.d("WebViewClientPlus", "loadWebResource[网络-下载成功] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
+                LogUtil.log("WebViewClientPlus", "loadWebResource[网络-下载成功] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
                 WebResourceResponse webResourceResponse = createWebResourceResponse(mimeType, file);
                 return webResourceResponse;
             } else {
-                Log.d("WebViewClientPlus", "loadWebResource[网络-下载失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
+                LogUtil.log("WebViewClientPlus", "loadWebResource[网络-下载失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
                 WebResourceResponse webResourceResponse = super.shouldInterceptRequest(view, url);
                 return webResourceResponse;
             }

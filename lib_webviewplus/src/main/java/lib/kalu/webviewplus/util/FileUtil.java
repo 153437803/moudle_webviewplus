@@ -16,7 +16,7 @@ public class FileUtil {
 
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String mimetype = fileNameMap.getContentTypeFor(filepath);
-        Log.d("FileUtil", "getMimeType => mimetype = " + mimetype);
+        LogUtil.log("FileUtil", "getMimeType => mimetype = " + mimetype);
         return mimetype;
     }
 

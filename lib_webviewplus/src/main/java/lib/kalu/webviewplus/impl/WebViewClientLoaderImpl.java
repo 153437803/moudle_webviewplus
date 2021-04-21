@@ -15,6 +15,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import lib.kalu.webviewplus.util.LogUtil;
+
 /**
  * description: WebView - IO - Loader
  * created by kalu on 2021-04-20
@@ -56,7 +58,7 @@ public interface WebViewClientLoaderImpl {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             WebResourceResponse webResourceResponse = new WebResourceResponse(mimeType, "UTF-8", fileInputStream);
-            // Log.d("WebViewLoaderImpl", "loadResoruce => mimeType = " + mimeType + ", filepath = " + file.getAbsolutePath());
+            LogUtil.log("WebViewLoaderImpl", "createWebResourceResponse => mimeType = " + mimeType + ", filepath = " + file.getAbsolutePath());
             return webResourceResponse;
         } catch (Exception e) {
             return null;
@@ -94,10 +96,10 @@ public interface WebViewClientLoaderImpl {
             //完成后关闭流
             os.close();
             is.close();
-            Log.d("WebViewLoaderImpl", "downloadResoruce => status = true, fileUrl = " + fileUrl + ", filePath = " + file.getAbsolutePath());
+            LogUtil.log("WebViewLoaderImpl", "downloadResoruce => status = true, fileUrl = " + fileUrl + ", filePath = " + file.getAbsolutePath());
             return true;
         } catch (Exception e) {
-            Log.d("WebViewLoaderImpl", "downloadResoruce => status = false, fileUrl = " + fileUrl + ", filePath = null");
+            LogUtil.log("WebViewLoaderImpl", "downloadResoruce => status = false, fileUrl = " + fileUrl + ", filePath = null");
             return false;
         }
     }
