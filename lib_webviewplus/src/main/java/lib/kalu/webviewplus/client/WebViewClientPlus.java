@@ -154,6 +154,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
                 return webResourceResponse;
             } else {
                 LogUtil.log("WebViewClientPlus", "loadWebResource[网络-下载失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
+                file.delete();
                 WebResourceResponse webResourceResponse = super.shouldInterceptRequest(view, url);
                 return webResourceResponse;
             }

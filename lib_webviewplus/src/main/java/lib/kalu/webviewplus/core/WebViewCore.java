@@ -9,6 +9,7 @@ import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.Map;
 
@@ -188,9 +189,8 @@ public class WebViewCore extends WebView implements WebViewImpl {
     public void initBackground(@NonNull WebView webView) {
 
         if (null != webView) {
-
-            // fix h5网页视频有声音没图像
-            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+            setBackgroundResource(android.R.color.transparent);
         }
     }
 
