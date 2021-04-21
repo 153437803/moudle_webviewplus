@@ -19,6 +19,7 @@ public class JavascriptUtil {
             String javascript = URLEncoder.encode(js, "utf-8");
             return javascript;
         } catch (Exception e) {
+            LogUtil.log("JavascriptUtil", "encode => message = " + e.getMessage(), e);
             return null;
         }
     }

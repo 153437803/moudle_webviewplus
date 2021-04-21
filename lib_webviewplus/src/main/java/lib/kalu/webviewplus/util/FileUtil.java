@@ -5,12 +5,13 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.net.FileNameMap;
+import java.net.URL;
 import java.net.URLConnection;
 
 public class FileUtil {
@@ -23,43 +24,36 @@ public class FileUtil {
         return mimetype;
     }
 
-    public static boolean writeToLocal(@NonNull String filepath, @NonNull byte[] bytes) {
-
-        boolean result = false;
-        FileOutputStream fileOutputStream = null;
-        BufferedWriter bufferedWriter = null;
+    public static final boolean writeToLocal(@NonNull String fileUrl, @NonNull String finePath) {
 
         try {
 
-            fileOutputStream = new FileOutputStream(filepath);
-            bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+            URL url = new URL(fileUrl);
+            URLConnection conn = url.openConnection();
+            InputStream is = conn.getInputStream();
 
-            String value = new String(bytes);
-            bufferedWriter.write(value);
-            bufferedWriter.flush();
-            result = true;
-
+            //下载后的文件名
+            File file = new File(finePath);
+            if (file.exists()) {
+                file.delete();
+            }
+            //创建字节流
+            byte[] bs = new byte[1024];
+            int len;
+            OutputStream os = new FileOutputStream(file.getAbsolutePath());
+            //写数据
+            while ((len = is.read(bs)) != -1) {
+                os.write(bs, 0, len);
+            }
+            //完成后关闭流
+            os.close();
+            is.close();
+            LogUtil.log("FileUtil", "writeToLocal => status = true, fileUrl = " + fileUrl + ", filePath = " + file.getAbsolutePath());
+            return true;
         } catch (Exception e) {
-
-            result = false;
-        } finally {
-
-            if (null != fileOutputStream) {
-                try {
-                    fileOutputStream.close();
-                } catch (Exception e) {
-                }
-            }
-
-            if (null != bufferedWriter) {
-                try {
-                    bufferedWriter.close();
-                } catch (Exception e) {
-                }
-            }
+            LogUtil.log("FileUtil", "writeToLocal => status = false, fileUrl = " + fileUrl + ", filePath = null");
+            return false;
         }
-
-        return result;
     }
 
     public static String readAssets(@NonNull Context context, @NonNull String fileName) {
@@ -76,11 +70,13 @@ public class FileUtil {
             }
             return sb.toString();
         } catch (Exception e) {
+            LogUtil.log("FileUtil", "readAssets => message = " + e.getMessage(), e);
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
+                    LogUtil.log("FileUtil", "readAssets => message = " + e.getMessage(), e);
                 }
             }
         }

@@ -146,7 +146,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         else {
 
             // 下载状态
-            boolean status = downloadResoruce(url, file.getAbsolutePath());
+            boolean status = FileUtil.writeToLocal(url, file.getAbsolutePath());
 
             if (status) {
                 LogUtil.log("WebViewClientPlus", "loadWebResource[网络-下载成功] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());

@@ -64,43 +64,4 @@ public interface WebViewClientLoaderImpl {
             return null;
         }
     }
-
-    /**
-     * 缓存资源文件
-     *
-     * @param fileUrl
-     * @param finePath
-     * @return
-     */
-    default boolean downloadResoruce(@NonNull String fileUrl, @NonNull String finePath) {
-
-        try {
-
-            URL url = new URL(fileUrl);
-            URLConnection conn = url.openConnection();
-            InputStream is = conn.getInputStream();
-
-            //下载后的文件名
-            File file = new File(finePath);
-            if (file.exists()) {
-                file.delete();
-            }
-            //创建字节流
-            byte[] bs = new byte[1024];
-            int len;
-            OutputStream os = new FileOutputStream(file.getAbsolutePath());
-            //写数据
-            while ((len = is.read(bs)) != -1) {
-                os.write(bs, 0, len);
-            }
-            //完成后关闭流
-            os.close();
-            is.close();
-            LogUtil.log("WebViewLoaderImpl", "downloadResoruce => status = true, fileUrl = " + fileUrl + ", filePath = " + file.getAbsolutePath());
-            return true;
-        } catch (Exception e) {
-            LogUtil.log("WebViewLoaderImpl", "downloadResoruce => status = false, fileUrl = " + fileUrl + ", filePath = null");
-            return false;
-        }
-    }
 }
