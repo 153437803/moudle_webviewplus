@@ -9,10 +9,11 @@ import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 
+import java.net.URLEncoder;
+
 import lib.kalu.webviewplus.client.WebChromeClientPlus;
 import lib.kalu.webviewplus.client.WebViewClientPlus;
 import lib.kalu.webviewplus.impl.WebViewImpl;
-import lib.kalu.webviewplus.util.LogUtil;
 
 /**
  * description:
@@ -177,6 +178,15 @@ public class WebViewCore extends WebView implements WebViewImpl {
             webView.setWebChromeClient(new WebChromeClientPlus() {
 
             });
+        }
+    }
+
+    @Override
+    public void loadJavascript(@NonNull String js) {
+        try {
+            String javascript = URLEncoder.encode(js, "utf-8");
+            loadDataWithBaseURL(null, javascript, "application/javascript", "utf-8", null);
+        } catch (Exception e) {
         }
     }
 

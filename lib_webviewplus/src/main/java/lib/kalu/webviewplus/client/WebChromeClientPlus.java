@@ -3,6 +3,7 @@ package lib.kalu.webviewplus.client;
 import android.net.Uri;
 import android.view.View;
 import android.webkit.ConsoleMessage;
+import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -31,39 +32,40 @@ public class WebChromeClientPlus extends WebChromeClient implements WebChromeCli
         super.onShowCustomView(view, callback);
     }
 
-    /**
-     * dialog - alert
-     *
-     * @param view
-     * @param url
-     * @param message
-     * @param result
-     * @return
-     */
     @Override
     public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
         return super.onJsAlert(view, url, message, result);
     }
 
-    /**
-     * dialog - confirm
-     *
-     * @param view
-     * @param url
-     * @param message
-     * @param result
-     * @return
-     */
     @Override
     public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
         return super.onJsConfirm(view, url, message, result);
     }
 
     @Override
+    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+        return super.onJsPrompt(view, url, message, defaultValue, result);
+    }
+
+    @Override
+    public boolean onJsTimeout() {
+        return super.onJsTimeout();
+    }
+
+    @Override
+    public boolean onJsBeforeUnload(WebView view, String url, String message, JsResult result) {
+        return super.onJsBeforeUnload(view, url, message, result);
+    }
+
+    /*********/
+
+    @Override
     public void onProgressChanged(WebView view, int newProgress) {
         super.onProgressChanged(view, newProgress);
         onProgressChanged(view, view.getUrl(), newProgress);
     }
+
+    /*********/
 
     @Override
     public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
@@ -76,4 +78,6 @@ public class WebChromeClientPlus extends WebChromeClient implements WebChromeCli
         printConsoleMessage("WebChromeClientPlus", message);
         super.onConsoleMessage(message, lineNumber, sourceID);
     }
+
+    /*********/
 }

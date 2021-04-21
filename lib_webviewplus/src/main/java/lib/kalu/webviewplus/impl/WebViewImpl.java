@@ -19,5 +19,7 @@ public interface WebViewImpl {
 
     void initWebChromeClient(@NonNull WebView webView);
 
+    void loadJavascript(@NonNull String js);
+
     void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, @IntRange(from = 0, to = 100) int newProgress);
 }
