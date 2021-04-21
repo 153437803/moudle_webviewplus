@@ -181,7 +181,7 @@ public class WebViewCore extends WebView implements WebViewImpl {
     }
 
     @Override
-    public void onProgressChanged(@NonNull WebView view, int newProgress) {
-        LogUtil.log("WebViewCore", "onProgressChanged => newProgress = " + newProgress);
+    public void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress) {
+
     }
 }
