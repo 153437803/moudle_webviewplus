@@ -6,7 +6,6 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,14 +15,18 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import lib.kalu.webviewplus.util.MD5Util;
-
 /**
- * description:
+ * description: WebView - IO - Loader
  * created by kalu on 2021-04-20
  */
-public interface WebViewLoaderImpl {
+public interface WebViewClientLoaderImpl {
 
+    /**
+     * 创建缓存资源目录
+     *
+     * @param view
+     * @return
+     */
     default File createWebplusDir(@NonNull WebView view) {
 
         // 判断本地资源是否存在
@@ -41,7 +44,14 @@ public interface WebViewLoaderImpl {
         return webplusFile;
     }
 
-    default WebResourceResponse loadResoruce(@NonNull String mimeType, @NonNull File file) {
+    /**
+     * 创建本地资源响应
+     *
+     * @param mimeType
+     * @param file
+     * @return
+     */
+    default WebResourceResponse createWebResourceResponse(@NonNull String mimeType, @NonNull File file) {
 
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -53,6 +63,13 @@ public interface WebViewLoaderImpl {
         }
     }
 
+    /**
+     * 缓存资源文件
+     *
+     * @param fileUrl
+     * @param finePath
+     * @return
+     */
     default boolean downloadResoruce(@NonNull String fileUrl, @NonNull String finePath) {
 
         try {

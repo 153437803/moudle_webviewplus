@@ -16,15 +16,14 @@ import androidx.annotation.Nullable;
 import java.io.File;
 
 import lib.kalu.webviewplus.impl.WebViewClientImpl;
-import lib.kalu.webviewplus.impl.WebViewLoaderImpl;
 import lib.kalu.webviewplus.util.FileUtil;
 import lib.kalu.webviewplus.util.MD5Util;
 
 /**
- * description:
+ * description: WebViewClient
  * created by kalu on 2021-04-20
  */
-public class WebViewClientPlus extends WebViewClient implements WebViewClientImpl, WebViewLoaderImpl {
+public class WebViewClientPlus extends WebViewClient implements WebViewClientImpl {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -46,14 +45,13 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Nullable
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-        return loadWebResource(view, url);
+        return loadResourceUrl(view, url);
     }
 
     @Nullable
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-        String url = request.getUrl().toString();
-        return loadWebResource(view, url);
+        return loadResourceUrl(view, request.getUrl().toString());
     }
 
     /************/
@@ -64,7 +62,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         Log.e("WebViewClientPlus", "onReceivedError1 => errorCode = " + errorCode + ", description" + description);
 
         // 加载错误本地静态资源
-        loadFailResource(view);
+        loadResourceFail(view);
     }
 
     @Override
@@ -73,16 +71,13 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         Log.e("WebViewClientPlus", "onReceivedError2 => errorCode = " + error.getErrorCode() + ", description" + error.getDescription());
 
         // 加载错误本地静态资源
-        loadFailResource(view);
+        loadResourceFail(view);
     }
 
     @Override
     public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
         super.onReceivedHttpError(view, request, errorResponse);
         Log.e("WebViewClientPlus", "onReceivedError3 => statusCode = " + errorResponse.getStatusCode());
-
-        // 加载错误本地静态资源
-        // loadFailResource(view);
     }
 
     @Override
@@ -94,7 +89,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     }
 
     @Override
-    public WebResourceResponse loadWebResource(@NonNull WebView view, @NonNull String url) {
+    public WebResourceResponse loadResourceUrl(@NonNull WebView view, @NonNull String url) {
         // Log.d("WebViewClientPlus", "loadWebResource => url = " + url);
 
         int lastIndexOf = url.lastIndexOf("/");
@@ -131,7 +126,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         // 资源文件, 存在
         else if (null != file && file.exists()) {
 
-            WebResourceResponse webResourceResponse = loadResoruce(mimeType, file);
+            WebResourceResponse webResourceResponse = createWebResourceResponse(mimeType, file);
 
             // 解析失败, 当次不在进行缓存策略
             if (null == webResourceResponse) {
@@ -155,7 +150,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
 
             if (status) {
                 Log.d("WebViewClientPlus", "loadWebResource[网络-下载成功] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
-                WebResourceResponse webResourceResponse = loadResoruce(mimeType, file);
+                WebResourceResponse webResourceResponse = createWebResourceResponse(mimeType, file);
                 return webResourceResponse;
             } else {
                 Log.d("WebViewClientPlus", "loadWebResource[网络-下载失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());

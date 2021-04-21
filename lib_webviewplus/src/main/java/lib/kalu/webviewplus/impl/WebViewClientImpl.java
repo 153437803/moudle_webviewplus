@@ -7,12 +7,26 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 
 /**
- * description:
+ * description: WebViewClient - Impl
  * created by kalu on 2021-04-20
  */
-public interface WebViewClientImpl {
+public interface WebViewClientImpl extends WebViewClientLoaderImpl {
 
-    default void loadFailResource(@NonNull WebView webView) {
+    /**
+     * 加载网络资源
+     *
+     * @param view
+     * @param url
+     * @return
+     */
+    WebResourceResponse loadResourceUrl(@NonNull WebView view, @NonNull String url);
+
+    /**
+     * 加载本地错误提示资源
+     *
+     * @param webView
+     */
+    default void loadResourceFail(@NonNull WebView webView) {
 
         if (null != webView && null != webView.getContext()) {
 
@@ -27,6 +41,4 @@ public interface WebViewClientImpl {
             webView.loadUrl(localUrl);
         }
     }
-
-    WebResourceResponse loadWebResource(@NonNull WebView view, @NonNull String url);
 }

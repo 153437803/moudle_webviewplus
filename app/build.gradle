@@ -22,22 +22,6 @@ android {
         ndk {
             abiFilters rootProject.ext.android.abiFilters.split(",")
         }
-
-        //添加此行
-        flavorDimensions "default"
-    }
-
-    applicationVariants.all {
-        variant ->
-            variant.outputs.all {
-                variant.productFlavors.each { flavor ->
-                    def channel = new String(flavor.name).toLowerCase()
-                    def version = new String(flavor.versionName).toLowerCase()
-                    def type = new String(buildType.name).toLowerCase()
-                    def time = new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08"))
-                    outputFileName = "frame_" + channel + "_" + type + "_v" + version + "_" + time + ".apk"
-                }
-            }
     }
 
     signingConfigs {
@@ -106,8 +90,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // 模块依赖
-     implementation project(':lib_webviewplus')
-//    implementation(name: 'webviewplus_release_20210420', ext: 'aar')
+    // implementation project(':lib_webviewplus')
+    implementation(name: 'webviewplus_release_20210421', ext: 'aar')
 
     // 三方依赖
     implementation rootProject.ext.dependencies.support_activity
