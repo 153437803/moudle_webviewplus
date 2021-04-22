@@ -15,4 +15,6 @@ public interface OnWebStatusChangeListener {
     void onPageStarted(@NonNull WebView view, @NonNull String url);
 
     void onPageFinished(@NonNull WebView view, @NonNull String url);
+
+    void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress);
 }

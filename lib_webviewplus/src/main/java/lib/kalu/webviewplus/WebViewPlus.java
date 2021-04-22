@@ -55,6 +55,15 @@ public final class WebViewPlus extends WebViewCore {
         }
     }
 
+    @Override
+    public void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress) {
+        super.onProgressChanged(view, targetUrl, newProgress);
+
+        if (null != onWebStatusChangeListener) {
+            onWebStatusChangeListener.onProgressChanged(view, targetUrl, newProgress);
+        }
+    }
+
     /****************/
 
     private OnWebStatusChangeListener onWebStatusChangeListener;
