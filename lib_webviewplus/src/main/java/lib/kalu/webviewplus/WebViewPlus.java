@@ -12,7 +12,7 @@ import lib.kalu.webviewplus.core.WebViewCore;
  * created by kalu on 2021-04-20
  */
 @Keep
-public class WebViewPlus extends WebViewCore {
+public final class WebViewPlus extends WebViewCore {
 
     public WebViewPlus(Context context) {
         super(context);
