@@ -1,5 +1,6 @@
 package lib.kalu.webviewplus.client;
 
+import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.view.KeyEvent;
 import android.webkit.SslErrorHandler;
@@ -14,7 +15,9 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 
+import lib.kalu.webviewplus.R;
 import lib.kalu.webviewplus.impl.WebViewClientImpl;
+import lib.kalu.webviewplus.impl.WebViewImpl;
 import lib.kalu.webviewplus.util.FileUtil;
 import lib.kalu.webviewplus.util.LogUtil;
 import lib.kalu.webviewplus.util.MD5Util;
@@ -57,9 +60,38 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     /************/
 
     @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        super.onPageStarted(view, url, favicon);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0 && url.startsWith("http") && null == view.getTag(R.id.id_webviewplus_status)) {
+            view.setTag(R.id.id_webviewplus_status, 1);
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onPageStarted(view, url);
+        }
+    }
+
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0 && url.startsWith("http") && null != view.getTag(R.id.id_webviewplus_status)) {
+            view.setTag(R.id.id_webviewplus_status, null);
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onPageFinished(view, url);
+        }
+    }
+
+    /************/
+
+    @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         // super.onReceivedError(view, errorCode, description, failingUrl);
         LogUtil.log("WebViewClientPlus", "onReceivedError1 => errorCode = " + errorCode + ", description = " + description);
+
+        // 加载结束回调
+        if (null != view && view instanceof WebViewImpl && null != failingUrl && failingUrl.length() > 0 && failingUrl.startsWith("http") && null != view.getTag(R.id.id_webviewplus_status)) {
+            view.setTag(R.id.id_webviewplus_status, null);
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onPageFinished(view, failingUrl);
+        }
 
         // 加载错误本地静态资源
         loadResourceFail(view);
@@ -69,6 +101,13 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         // super.onReceivedError(view, request, error);
         LogUtil.log("WebViewClientPlus", "onReceivedError2 => errorCode = " + error.getErrorCode() + ", description = " + error.getDescription());
+
+        // 加载结束回调
+        if (null != view && view instanceof WebViewImpl && null != request.getUrl() && request.getUrl().toString().length() > 0 && request.getUrl().toString().startsWith("http") && null != view.getTag(R.id.id_webviewplus_status)) {
+            view.setTag(R.id.id_webviewplus_status, null);
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onPageFinished(view, request.getUrl().toString());
+        }
 
         // 加载错误本地静态资源
         loadResourceFail(view);

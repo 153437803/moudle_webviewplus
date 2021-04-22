@@ -36,16 +36,4 @@ public interface WebChromeClientImpl {
     default void printConsoleMessage(@NonNull String tag, @NonNull String msg) {
         LogUtil.log(tag, "printConsoleMessage => msg = " + msg);
     }
-
-    /**
-     * @param view
-     * @param newProgress
-     */
-    default void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, @IntRange(from = 0, to = 100) int newProgress) {
-        if (null != view && view instanceof WebViewImpl) {
-            WebViewImpl webViewImpl = (WebViewImpl) view;
-            webViewImpl.onProgressChanged(view, targetUrl, newProgress);
-            LogUtil.log("WebChromeClientImpl", "onProgressChanged => newProgress = " + newProgress + ", targetUrl = " + targetUrl);
-        }
-    }
 }

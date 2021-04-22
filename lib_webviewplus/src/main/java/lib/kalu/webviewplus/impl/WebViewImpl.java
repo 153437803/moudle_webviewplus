@@ -1,6 +1,5 @@
 package lib.kalu.webviewplus.impl;
 
-import android.content.Context;
 import android.webkit.WebView;
 
 import androidx.annotation.IntRange;
@@ -25,6 +24,12 @@ public interface WebViewImpl {
     void initWebViewClient(@NonNull WebView webView);
 
     void initWebChromeClient(@NonNull WebView webView);
+
+    /*****/
+
+    void onPageStarted(@NonNull WebView view, @NonNull String url);
+
+    void onPageFinished(@NonNull WebView view, @NonNull String url);
 
     /*****/
 

@@ -10,6 +10,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import lib.kalu.webviewplus.impl.WebChromeClientImpl;
+import lib.kalu.webviewplus.impl.WebViewImpl;
+import lib.kalu.webviewplus.util.LogUtil;
 
 /**
  * description:
@@ -62,7 +64,11 @@ public class WebChromeClientPlus extends WebChromeClient implements WebChromeCli
     @Override
     public void onProgressChanged(WebView view, int newProgress) {
         super.onProgressChanged(view, newProgress);
-        onProgressChanged(view, view.getUrl(), newProgress);
+        if (null != view && view instanceof WebViewImpl) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onProgressChanged(view, view.getUrl(), newProgress);
+            LogUtil.log("WebChromeClientPlus", "onProgressChanged => newProgress = " + newProgress + ", targetUrl = " + view.getUrl());
+        }
     }
 
     /*********/

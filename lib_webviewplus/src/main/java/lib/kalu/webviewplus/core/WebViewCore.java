@@ -286,6 +286,16 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     }
 
     @Override
+    public void onPageStarted(@NonNull WebView view, @NonNull String url) {
+        LogUtil.log("WebViewCore", "onPageStarted => url = " + url);
+    }
+
+    @Override
+    public void onPageFinished(@NonNull WebView view, @NonNull String url) {
+        LogUtil.log("WebViewCore", "onPageFinished => url = " + url);
+    }
+
+    @Override
     public void loadJavascriptAssets(@NonNull String fliename) {
         Context context = getContext().getApplicationContext();
         String jstring = FileUtil.readAssets(context, fliename);
