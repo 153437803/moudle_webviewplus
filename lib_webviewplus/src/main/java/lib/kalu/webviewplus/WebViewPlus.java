@@ -67,6 +67,7 @@ public final class WebViewPlus extends WebViewCore {
 
     private OnWebStatusChangeListener onWebStatusChangeListener;
 
+    @Keep
     public void setOnWebStatusChangeListener(@NonNull OnWebStatusChangeListener listener) {
         this.onWebStatusChangeListener = listener;
     }
