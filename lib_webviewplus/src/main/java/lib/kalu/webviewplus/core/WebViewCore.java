@@ -3,6 +3,8 @@ package lib.kalu.webviewplus.core;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -26,7 +28,7 @@ import lib.kalu.webviewplus.util.LogUtil;
  * description:
  * created by kalu on 2021-04-20
  */
-public class WebViewCore extends WebView implements WebViewImpl {
+public class WebViewCore extends WebView implements WebViewImpl, Handler.Callback {
 
     public WebViewCore(Context context) {
         super(context);
@@ -79,6 +81,27 @@ public class WebViewCore extends WebView implements WebViewImpl {
     }
 
     /**********/
+
+    private final Handler mHandler = new Handler(WebViewCore.this);
+
+    @Override
+    public boolean handleMessage(@NonNull Message msg) {
+        if (msg.what != 1001 || msg.arg1 != 2002 || msg.arg2 != 3003)
+            return false;
+
+        LogUtil.log("WebViewCore", "refresh => run");
+        super.reload();
+        LogUtil.log("WebViewCore", "refresh => over");
+        return false;
+    }
+
+    @JavascriptInterface
+    @Override
+    public void reload() {
+        LogUtil.log("WebViewCore", "refresh => start");
+        Message message = Message.obtain(mHandler, 1001, 2002, 3003, null);
+        message.sendToTarget();
+    }
 
     @Override
     public void onPause() {
@@ -241,18 +264,6 @@ public class WebViewCore extends WebView implements WebViewImpl {
 
             });
         }
-    }
-
-    @JavascriptInterface
-    @Override
-    public void reload() {
-        LogUtil.log("WebViewCore", "refresh =>");
-        post(new Runnable() {
-            @Override
-            public void run() {
-                WebViewCore.super.reload();
-            }
-        });
     }
 
     @Override
