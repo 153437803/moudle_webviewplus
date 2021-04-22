@@ -8,7 +8,6 @@ import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import lib.kalu.webviewplus.core.WebViewCore;
-import lib.kalu.webviewplus.listener.OnWebStatusChangeListener;
 
 /**
  * description:
@@ -71,4 +70,16 @@ public final class WebViewPlus extends WebViewCore {
     public void setOnWebStatusChangeListener(@NonNull OnWebStatusChangeListener listener) {
         this.onWebStatusChangeListener = listener;
     }
+
+    @Keep
+    public interface OnWebStatusChangeListener {
+
+        void onPageStarted(@NonNull WebView view, @NonNull String url);
+
+        void onPageFinished(@NonNull WebView view, @NonNull String url);
+
+        void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress);
+    }
+
+    /****************/
 }
