@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.Map;
 
+import lib.kalu.webviewplus.R;
 import lib.kalu.webviewplus.client.WebChromeClientPlus;
 import lib.kalu.webviewplus.client.WebViewClientPlus;
 import lib.kalu.webviewplus.impl.WebViewImpl;
@@ -86,12 +87,30 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
 
     @Override
     public boolean handleMessage(@NonNull Message msg) {
-        if (msg.what != 1001 || msg.arg1 != 2002 || msg.arg2 != 3003)
-            return false;
 
         LogUtil.log("WebViewCore", "refresh => run");
-        super.reload();
-        LogUtil.log("WebViewCore", "refresh => over");
+
+        if (msg.what != 1001 || msg.arg1 != 2002 || msg.arg2 != 3003) {
+            LogUtil.log("WebViewCore", "refresh => false");
+            return false;
+        }
+
+        Object tag = getTag(R.id.id_webviewplus_targeturl);
+        if (null == tag) {
+            LogUtil.log("WebViewCore", "refresh => false");
+            return false;
+        }
+
+        String url = tag.toString();
+        if (!url.startsWith("http")) {
+            LogUtil.log("WebViewCore", "refresh => false");
+            return false;
+        }
+
+        loadUrl(url);
+        // setTag(R.id.id_webviewplus_targeturl, null);
+        LogUtil.log("WebViewCore", "refresh => succ");
+
         return false;
     }
 

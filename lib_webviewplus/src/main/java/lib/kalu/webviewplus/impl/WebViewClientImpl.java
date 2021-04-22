@@ -6,6 +6,8 @@ import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 
+import lib.kalu.webviewplus.R;
+
 /**
  * description: WebViewClient - Impl
  * created by kalu on 2021-04-20
@@ -29,6 +31,10 @@ public interface WebViewClientImpl extends WebViewClientLoaderImpl {
     default void loadResourceFail(@NonNull WebView webView) {
 
         if (null != webView && null != webView.getContext()) {
+
+            if (null == webView.getTag(R.id.id_webviewplus_targeturl) && null != webView.getUrl() && webView.getUrl().length() > 0 && webView.getUrl().startsWith("http")) {
+                webView.setTag(R.id.id_webviewplus_targeturl, webView.getUrl());
+            }
 
             Context context = webView.getContext().getApplicationContext();
             int heightPixels = context.getResources().getDisplayMetrics().heightPixels;
