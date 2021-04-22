@@ -59,7 +59,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         // super.onReceivedError(view, errorCode, description, failingUrl);
-        LogUtil.log("WebViewClientPlus", "onReceivedError1 => errorCode = " + errorCode + ", description" + description);
+        LogUtil.log("WebViewClientPlus", "onReceivedError1 => errorCode = " + errorCode + ", description = " + description);
 
         // 加载错误本地静态资源
         loadResourceFail(view);
@@ -68,7 +68,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Override
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         // super.onReceivedError(view, request, error);
-        LogUtil.log("WebViewClientPlus", "onReceivedError2 => errorCode = " + error.getErrorCode() + ", description" + error.getDescription());
+        LogUtil.log("WebViewClientPlus", "onReceivedError2 => errorCode = " + error.getErrorCode() + ", description = " + error.getDescription());
 
         // 加载错误本地静态资源
         loadResourceFail(view);
