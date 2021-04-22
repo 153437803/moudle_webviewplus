@@ -35,7 +35,7 @@ public interface WebViewClientLoaderImpl {
         Context context = view.getContext().getApplicationContext();
         File filesDir = context.getFilesDir();
 
-        File webplusFile = new File(filesDir, "webviewplus");
+        File webplusFile = new File(filesDir, "webplus");
         if (null != webplusFile && webplusFile.isFile()) {
             webplusFile.delete();
         }
