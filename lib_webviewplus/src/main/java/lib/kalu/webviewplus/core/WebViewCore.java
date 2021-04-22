@@ -88,28 +88,28 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     @Override
     public boolean handleMessage(@NonNull Message msg) {
 
-        LogUtil.log("WebViewCore", "refresh => run");
+        LogUtil.log("WebViewCore", "reload => run");
 
         if (msg.what != 1001 || msg.arg1 != 2002 || msg.arg2 != 3003) {
-            LogUtil.log("WebViewCore", "refresh => false");
+            LogUtil.log("WebViewCore", "reload => false");
             return false;
         }
 
         Object tag = getTag(R.id.id_webviewplus_targeturl);
         if (null == tag) {
-            LogUtil.log("WebViewCore", "refresh => false");
+            LogUtil.log("WebViewCore", "reload => false");
             return false;
         }
 
         String url = tag.toString();
         if (!url.startsWith("http")) {
-            LogUtil.log("WebViewCore", "refresh => false");
+            LogUtil.log("WebViewCore", "reload => false");
             return false;
         }
 
         loadUrl(url);
         // setTag(R.id.id_webviewplus_targeturl, null);
-        LogUtil.log("WebViewCore", "refresh => succ");
+        LogUtil.log("WebViewCore", "reload => succ");
 
         return false;
     }
@@ -117,7 +117,7 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     @JavascriptInterface
     @Override
     public void reload() {
-        LogUtil.log("WebViewCore", "refresh => start");
+        LogUtil.log("WebViewCore", "reload => start");
         Message message = Message.obtain(mHandler, 1001, 2002, 3003, null);
         message.sendToTarget();
     }
