@@ -59,8 +59,11 @@ public final class WebplusManager {
         webView.clearHistory();
 
         if (null != webView.getParent()) {
-            ViewGroup viewGroup = (ViewGroup) webView.getParent();
-            viewGroup.removeView(webView);
+            try {
+                ViewGroup viewGroup = (ViewGroup) webView.getParent();
+                viewGroup.removeView(webView);
+            }catch (Exception e){
+            }
         }
 
         LogUtil.log("WebplusManger", "pop => size = " + stack.size());
@@ -83,8 +86,11 @@ public final class WebplusManager {
         webView.clearHistory();
 
         if (null != webView.getParent()) {
-            ViewGroup viewGroup = (ViewGroup) webView.getParent();
-            viewGroup.removeView(webView);
+            try {
+                ViewGroup viewGroup = (ViewGroup) webView.getParent();
+                viewGroup.removeView(webView);
+            }catch (Exception e){
+            }
         }
 
         stack.push(webView);
