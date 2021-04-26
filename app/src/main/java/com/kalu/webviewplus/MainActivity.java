@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import lib.kalu.webviewplus.WebViewLayout;
 import lib.kalu.webviewplus.WebViewPlus;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,7 +14,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        WebViewPlus webViewPlus = findViewById(R.id.webview);
+//        WebViewPlus webViewPlus = findViewById(R.id.webview);
+////        webViewPlus.loadUrl("http://umspos.caitc.cn/cajinfu-wx-web/#/index");
+//         webViewPlus.loadUrl("https://etrust.caitc.cn/etrust/hybrid/#/index");
+
+        WebViewLayout webViewPlus = findViewById(R.id.webview);
 //        webViewPlus.loadUrl("http://umspos.caitc.cn/cajinfu-wx-web/#/index");
          webViewPlus.loadUrl("https://etrust.caitc.cn/etrust/hybrid/#/index");
     }

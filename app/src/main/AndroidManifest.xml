@@ -24,7 +24,7 @@
         tools:replace="android:allowBackup">
 
         <activity
-            android:name="com.kalu.webviewplus.MainActivity"
+            android:name="com.kalu.webviewplus.SplashActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard|uiMode"
             android:exported="true"
             android:theme="@style/ThemeApp">
@@ -34,6 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.kalu.webviewplus.MainActivity"
+            android:exported="false"
+            android:theme="@style/ThemeApp" />
 
     </application>
 

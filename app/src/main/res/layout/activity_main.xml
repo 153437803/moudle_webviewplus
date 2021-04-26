@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <lib.kalu.webviewplus.WebViewPlus
+<!--    <lib.kalu.webviewplus.WebViewPlus-->
+<!--        android:id="@+id/webview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+    <lib.kalu.webviewplus.WebViewLayout
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
