@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 /**
- * description:
+ * description: md5
  * created by kalu on 2021-04-20
  */
 public final class MD5Util {

@@ -14,6 +14,10 @@ import java.net.FileNameMap;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * description: 文件操作
+ * created by kalu on 2021-04-26
+ */
 public class FileUtil {
 
     public static final void deleteFile(@NonNull File file) {

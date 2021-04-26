@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         WebViewPlus webViewPlus = findViewById(R.id.webview);
-        webViewPlus.loadUrl("http://umspos.caitc.cn/cajinfu-wx-web/#/index");
+//        webViewPlus.loadUrl("http://umspos.caitc.cn/cajinfu-wx-web/#/index");
+         webViewPlus.loadUrl("https://etrust.caitc.cn/etrust/hybrid/#/index");
     }
 }

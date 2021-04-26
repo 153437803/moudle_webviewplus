@@ -75,10 +75,29 @@ public final class WebViewPlus extends WebViewCore {
     @Keep
     public interface OnWebStatusChangeListener {
 
+        /**
+         * 页面加载开始, 用于显示loading
+         *
+         * @param view
+         * @param url
+         */
         void onPageStarted(@NonNull WebView view, @NonNull String url);
 
+        /**
+         * 页面加载结束, 用于关闭loading
+         *
+         * @param view
+         * @param url
+         */
         void onPageFinished(@NonNull WebView view, @NonNull String url);
 
+        /**
+         * 页面加载进度, 用于显示WebView进度条变化
+         *
+         * @param view
+         * @param targetUrl
+         * @param newProgress
+         */
         void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress);
     }
 
