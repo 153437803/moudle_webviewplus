@@ -171,7 +171,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
             if (null == webResourceResponse) {
 
                 LogUtil.log("WebViewClientPlus", "loadWebResource[缓存-解析失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
-                file.delete();
+                FileUtil.deleteFile(file);
                 return super.shouldInterceptRequest(view, url);
             }
             // 解析成功
@@ -193,7 +193,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
                 return webResourceResponse;
             } else {
                 LogUtil.log("WebViewClientPlus", "loadWebResource[网络-下载失败] => mimeType = " + mimeType + ", url = " + url + ", filePath = " + file.getAbsolutePath());
-                file.delete();
+                FileUtil.deleteFile(file);
                 WebResourceResponse webResourceResponse = super.shouldInterceptRequest(view, url);
                 return webResourceResponse;
             }

@@ -16,6 +16,13 @@ import java.net.URLConnection;
 
 public class FileUtil {
 
+    public static final void deleteFile(@NonNull File file) {
+
+        if (null == file || !file.exists() || file.isDirectory())
+            return;
+        file.delete();
+    }
+
     public static final String getMimeType(@NonNull String filepath) {
 
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
