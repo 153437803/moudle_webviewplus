@@ -79,6 +79,20 @@ public final class WebViewLayout extends FrameLayout {
 
         WebView webView = (WebView) child;
         WebplusManager.push(webView);
-        LogUtil.log("WebViewLayout", "onAttachedToWindow => webView = "+webView);
+        LogUtil.log("WebViewLayout", "onAttachedToWindow => webView = " + webView);
+    }
+
+    @Keep
+    public void setOnWebStatusChangeListener(@NonNull WebViewPlus.OnWebStatusChangeListener listener) {
+
+        if (null == listener)
+            return;
+
+        View child = getChildAt(0);
+        if (null == child || !(child instanceof WebViewPlus))
+            return;
+
+        WebViewPlus webView = (WebViewPlus) child;
+        webView.setOnWebStatusChangeListener(listener);
     }
 }
