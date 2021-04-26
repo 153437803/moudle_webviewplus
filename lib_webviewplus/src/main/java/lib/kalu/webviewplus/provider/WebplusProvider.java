@@ -1,4 +1,4 @@
-package lib.kalu.webviewplus.contentprovider;
+package lib.kalu.webviewplus.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -18,13 +18,13 @@ import lib.kalu.webviewplus.util.LogUtil;
  * created by kalu on 2021-04-26
  */
 @Keep
-public class ContentProviderWebplus extends ContentProvider {
+public class WebplusProvider extends ContentProvider {
 
     public static Context mWebplusContext;
 
     @Override
     public boolean onCreate() {
-        LogUtil.log("ContentProviderWebplus", "onCreate =>");
+        LogUtil.log("WebplusProvider", "onCreate =>");
         mWebplusContext = getContext().getApplicationContext();
         WebplusManager.init();
         return true;
@@ -32,7 +32,7 @@ public class ContentProviderWebplus extends ContentProvider {
 
     @Override
     public void onLowMemory() {
-        LogUtil.log("ContentProviderWebplus", "onLowMemory =>");
+        LogUtil.log("WebplusProvider", "onLowMemory =>");
         super.onLowMemory();
         // 调用系统API结束进程
         // android.os.Process.killProcess(android.os.Process.myPid());

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import java.util.Stack;
 
 import lib.kalu.webviewplus.WebViewPlus;
-import lib.kalu.webviewplus.contentprovider.ContentProviderWebplus;
+import lib.kalu.webviewplus.provider.WebplusProvider;
 import lib.kalu.webviewplus.util.LogUtil;
 
 /**
@@ -22,7 +22,7 @@ public final class WebplusManager {
 
     private WebplusManager() {
         for (int i = 0; i < 4; i++) {
-            WebViewPlus webView = new WebViewPlus(ContentProviderWebplus.mWebplusContext);
+            WebViewPlus webView = new WebViewPlus(WebplusProvider.mWebplusContext);
             webView.loadUrl("file:///android_asset/netInit.html");
             LogUtil.log("WebplusManger", "WebplusManger => i = " + i + ", webview = " + webView);
             stack.push(webView);

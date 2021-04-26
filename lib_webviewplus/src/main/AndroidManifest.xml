@@ -15,8 +15,8 @@
         tools:ignore="HardcodedDebugMode">
 
         <provider
-            android:name="lib.kalu.webviewplus.contentprovider.ContentProviderWebplus"
-            android:authorities="${applicationId}.contentproviderwebplus"
+            android:name="lib.kalu.webviewplus.provider.WebplusProvider"
+            android:authorities="${applicationId}.webplusprovider"
             android:exported="false"
             android:multiprocess="true" />
 

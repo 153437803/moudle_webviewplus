@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 
-import lib.kalu.webviewplus.contentprovider.ContentProviderWebplus;
-
 public class SplashActivity extends AppCompatActivity {
 
     @Override
