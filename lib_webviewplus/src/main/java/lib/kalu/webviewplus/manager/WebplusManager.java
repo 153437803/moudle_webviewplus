@@ -24,18 +24,18 @@ public final class WebplusManager {
         for (int i = 0; i < 4; i++) {
             WebViewPlus webView = new WebViewPlus(WebplusProvider.mWebplusContext);
             webView.loadUrl("file:///android_asset/netInit.html");
-            LogUtil.log("WebplusManger", "WebplusManger => i = " + i + ", webview = " + webView);
+            LogUtil.log("WebplusManager", "WebplusManager => i = " + i + ", webview = " + webView);
             stack.push(webView);
         }
     }
 
     public static class Holder {
-        static WebplusManager webplusManger = new WebplusManager();
+        static WebplusManager WebplusManager = new WebplusManager();
     }
 
     public final static void init() {
-        WebplusManager webplusManger = Holder.webplusManger;
-        LogUtil.log("WebplusManger", "init => size = " + stack.size());
+        WebplusManager WebplusManager = Holder.WebplusManager;
+        LogUtil.log("WebplusManager", "init => size = " + stack.size());
     }
 
     public final static WebView pop(@NonNull Context context) {
@@ -66,7 +66,7 @@ public final class WebplusManager {
             }
         }
 
-        LogUtil.log("WebplusManger", "pop => size = " + stack.size());
+        LogUtil.log("WebplusManager", "pop => size = " + stack.size());
         return webView;
     }
 
@@ -94,6 +94,6 @@ public final class WebplusManager {
         }
 
         stack.push(webView);
-        LogUtil.log("WebplusManger", "push => size = " + stack.size());
+        LogUtil.log("WebplusManager", "push => size = " + stack.size());
     }
 }
