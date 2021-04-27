@@ -184,11 +184,11 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
             // fix h5网页视频有声音没图像
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
-//         设置是否显示水平滚动条
+            // 设置是否显示水平滚动条
             webView.setHorizontalScrollBarEnabled(false);
-//         设置垂直滚动条是否有叠加样式
+            // 设置垂直滚动条是否有叠加样式
             webView.setVerticalScrollbarOverlay(false);
-//         设置滚动条的样式
+            // 设置滚动条的样式
             webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
             WebSettings settings = webView.getSettings();
