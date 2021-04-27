@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <item name="id_webviewplus_targeturl" type="id" tools:ignore="ResourceName" />
+    <item name="id_webviewplus_initurl" type="id" tools:ignore="ResourceName" />
     <item name="id_webviewplus_status" type="id" tools:ignore="ResourceName" />
 </resources>
