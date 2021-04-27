@@ -202,9 +202,9 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
             }
 //        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
-            //         提高网页渲染的优先级
+            // 提高网页渲染的优先级
             settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
-            //         启用还H5的地理定位服务
+            // 启用还H5的地理定位服务
             settings.setGeolocationEnabled(false);
 
             // 是否保存密码
