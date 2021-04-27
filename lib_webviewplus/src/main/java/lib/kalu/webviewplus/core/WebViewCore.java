@@ -123,6 +123,29 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     }
 
     @Override
+    public boolean canGoBackOrForward(int steps) {
+//        return super.canGoBackOrForward(steps);
+        return canGoBack();
+    }
+
+    @Override
+    public boolean canGoBack() {
+        // 正常
+        if (null != getTag(R.id.id_webviewplus_initurl) && getTag(R.id.id_webviewplus_initurl).toString().equals(getUrl())) {
+            return false;
+        }
+        // 容错
+        else {
+            return super.canGoBack();
+        }
+    }
+
+    @Override
+    public boolean canGoForward() {
+        return super.canGoForward();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         pauseTimers();
@@ -138,6 +161,7 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     public void loadUrl(String url) {
         if (null == url || url.length() == 0)
             return;
+        setTag(R.id.id_webviewplus_initurl, url);
         super.loadUrl(url);
     }
 
@@ -145,6 +169,7 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     public void loadUrl(String url, Map<String, String> additionalHttpHeaders) {
         if (null == url || url.length() == 0)
             return;
+        setTag(R.id.id_webviewplus_initurl, url);
         super.loadUrl(url, additionalHttpHeaders);
     }
 
