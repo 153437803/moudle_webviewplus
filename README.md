@@ -9,3 +9,11 @@
 - lib.kalu.webviewplus.WebViewLayout [extend FrameLayout]
   内部实现webview自动初始化实例, 默认4个, 自动扩容回收
 ```
+
+#
+#### Todo List
+```
+- [x] js、css、img 资源缓存复用策略
+- [x] webview 状态变化监听, onProgressChanged、onPageStarted、onPageFinished
+- [x] webview自动初始化实例, 默认4个, 自动扩容回收
+```
