@@ -8,6 +8,8 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -330,6 +332,36 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     @Override
     public void onPageFinished(@NonNull WebView view, @NonNull String url) {
         LogUtil.log("WebViewCore", "onPageFinished => url = " + url);
+    }
+
+    @Override
+    public boolean onJsTimeout() {
+        LogUtil.log("WebViewCore", "onJsTimeout =>");
+        return true;
+    }
+
+    @Override
+    public boolean onJsBeforeUnload(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result) {
+        LogUtil.log("WebViewCore", "onJsBeforeUnload => url = " + url);
+        return true;
+    }
+
+    @Override
+    public boolean onJsAlert(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result) {
+        LogUtil.log("WebViewCore", "onJsAlert => url = " + url);
+        return true;
+    }
+
+    @Override
+    public boolean onJsConfirm(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result) {
+        LogUtil.log("WebViewCore", "onJsConfirm => url = " + url);
+        return true;
+    }
+
+    @Override
+    public boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result) {
+        LogUtil.log("WebViewCore", "onJsPrompt => url = " + url);
+        return true;
     }
 
     @Override

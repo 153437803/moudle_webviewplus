@@ -1,5 +1,7 @@
 package lib.kalu.webviewplus.impl;
 
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.WebView;
 
 import androidx.annotation.IntRange;
@@ -30,6 +32,18 @@ public interface WebViewImpl {
     void onPageStarted(@NonNull WebView view, @NonNull String url);
 
     void onPageFinished(@NonNull WebView view, @NonNull String url);
+
+    /*****/
+
+    boolean onJsTimeout();
+
+    boolean onJsBeforeUnload(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+
+    boolean onJsAlert(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+
+    boolean onJsConfirm(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+
+    boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result);
 
     /*****/
 

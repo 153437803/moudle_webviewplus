@@ -36,17 +36,29 @@ public class WebChromeClientPlus extends WebChromeClient implements WebChromeCli
 
     @Override
     public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-        return super.onJsAlert(view, url, message, result);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onJsAlert(view, url, message, result);
+        }
+        return true;
     }
 
     @Override
     public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-        return super.onJsConfirm(view, url, message, result);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onJsConfirm(view, url, message, result);
+        }
+        return true;
     }
 
     @Override
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-        return super.onJsPrompt(view, url, message, defaultValue, result);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onJsPrompt(view, url, message, defaultValue, result);
+        }
+        return true;
     }
 
     @Override
@@ -56,7 +68,11 @@ public class WebChromeClientPlus extends WebChromeClient implements WebChromeCli
 
     @Override
     public boolean onJsBeforeUnload(WebView view, String url, String message, JsResult result) {
-        return super.onJsBeforeUnload(view, url, message, result);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            webViewImpl.onJsBeforeUnload(view, url, message, result);
+        }
+        return true;
     }
 
     /*********/

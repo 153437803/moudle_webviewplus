@@ -2,6 +2,8 @@ package lib.kalu.webviewplus;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.WebView;
 
 import androidx.annotation.Keep;
@@ -63,6 +65,46 @@ public final class WebViewPlus extends WebViewCore {
         }
     }
 
+    @Override
+    public boolean onJsConfirm(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result) {
+        if (null != onWebStatusChangeListener) {
+            onWebStatusChangeListener.onJsConfirm(view, url, message, result);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result) {
+        if (null != onWebStatusChangeListener) {
+            onWebStatusChangeListener.onJsPrompt(view, url, message, defaultValue, result);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onJsAlert(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result) {
+        if (null != onWebStatusChangeListener) {
+            onWebStatusChangeListener.onJsAlert(view, url, message, result);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onJsBeforeUnload(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result) {
+        if (null != onWebStatusChangeListener) {
+            onWebStatusChangeListener.onJsBeforeUnload(view, url, message, result);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onJsTimeout() {
+        if (null != onWebStatusChangeListener) {
+            onWebStatusChangeListener.onJsTimeout();
+        }
+        return true;
+    }
+
     /****************/
 
     private OnWebStatusChangeListener onWebStatusChangeListener;
@@ -99,6 +141,16 @@ public final class WebViewPlus extends WebViewCore {
          * @param newProgress
          */
         void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress);
+
+        boolean onJsTimeout();
+
+        boolean onJsBeforeUnload(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+
+        boolean onJsAlert(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+
+        boolean onJsConfirm(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+
+        boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result);
     }
 
     /****************/
