@@ -13,7 +13,8 @@
 #
 #### 功能
 - [x] aar混淆配置
-- [x] js、css、img 资源缓存复用策略
+- [x] webview 自动缓存 js、css、img
 - [x] webview 状态变化监听, onProgressChanged、onPageStarted、onPageFinished
 - [x] webview 自动初始化实例, 默认4个, 自动扩容回收复用
 - [x] webview alert、confirm、prompt提供支持
+- [x] webview 支付初始化静态资源本地html[initAssetDefaultInitResourceName], 网络错误自定加载静态资源本地html[initAssetDefaultFailResourceName]

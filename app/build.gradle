@@ -90,8 +90,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // 模块依赖
-    implementation project(':lib_webviewplus')
-    // implementation(name: 'webviewplus_debug_20210429', ext: 'aar')
+    // implementation project(':lib_webviewplus')
+    implementation(name: 'webviewplus_debug_20210429', ext: 'aar')
 
     // 三方依赖
     implementation rootProject.ext.dependencies.support_activity
