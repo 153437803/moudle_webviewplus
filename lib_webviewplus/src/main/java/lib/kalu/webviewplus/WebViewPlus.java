@@ -142,14 +142,56 @@ public final class WebViewPlus extends WebViewCore {
          */
         void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress);
 
+        /**
+         * js超时
+         *
+         * @return
+         */
         boolean onJsTimeout();
 
+        /**
+         * js回调
+         *
+         * @param view
+         * @param url
+         * @param message
+         * @param result
+         * @return
+         */
         boolean onJsBeforeUnload(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
 
+        /**
+         * 提示框
+         *
+         * @param view
+         * @param url
+         * @param message
+         * @param result
+         * @return
+         */
         boolean onJsAlert(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
 
+        /**
+         * 确认框
+         *
+         * @param view
+         * @param url
+         * @param message
+         * @param result
+         * @return
+         */
         boolean onJsConfirm(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
 
+        /**
+         * 输入框
+         *
+         * @param view
+         * @param url
+         * @param message
+         * @param defaultValue
+         * @param result
+         * @return
+         */
         boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result);
     }
 
