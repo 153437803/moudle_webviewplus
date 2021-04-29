@@ -1,6 +1,7 @@
 package com.kalu.webviewplus;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebView;
@@ -10,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import lib.kalu.webviewplus.WebViewLayout;
 import lib.kalu.webviewplus.WebViewPlus;
-import lib.kalu.webviewplus.util.LogUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,17 +28,17 @@ public class MainActivity extends AppCompatActivity {
         webViewLayout.setOnWebStatusChangeListener(new WebViewPlus.OnWebStatusChangeListener() {
             @Override
             public void onPageStarted(@NonNull WebView view, @NonNull String url) {
-                LogUtil.log("MainActivity", "onPageStarted => url = " + url);
+                Log.d("MainActivity", "onPageStarted => url = " + url);
             }
 
             @Override
             public void onPageFinished(@NonNull WebView view, @NonNull String url) {
-                LogUtil.log("MainActivity", "onPageFinished => url = " + url);
+                Log.d("MainActivity", "onPageFinished => url = " + url);
             }
 
             @Override
             public void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress) {
-                LogUtil.log("MainActivity", "onProgressChanged => targetUrl = " + targetUrl + ", newProgress = " + newProgress);
+                Log.d("MainActivity", "onProgressChanged => targetUrl = " + targetUrl + ", newProgress = " + newProgress);
             }
 
             @Override

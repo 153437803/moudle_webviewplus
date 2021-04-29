@@ -380,5 +380,4 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     @Override
     public void onProgressChanged(@NonNull WebView view, @NonNull String targetUrl, int newProgress) {
     }
-
 }

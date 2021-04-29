@@ -1,5 +1,6 @@
 package lib.kalu.webviewplus.impl;
 
+import android.content.Context;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebView;
@@ -15,6 +16,14 @@ public interface WebViewImpl {
 
     default String initJavascriptInterface() {
         return "android";
+    }
+
+    default String initAssetDefaultResourceName(@NonNull Context context) {
+        int heightPixels = context.getResources().getDisplayMetrics().heightPixels;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("netError.html?height=");
+        stringBuilder.append(heightPixels * 0.3f);
+        return stringBuilder.toString();
     }
 
     /*****/

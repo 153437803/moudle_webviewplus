@@ -28,7 +28,7 @@ public interface WebViewClientImpl extends WebViewClientLoaderImpl {
      *
      * @param webView
      */
-    default void loadResourceFail(@NonNull WebView webView) {
+    default void loadResourceFail(@NonNull WebView webView, @NonNull String assetFileName) {
 
         if (null != webView && null != webView.getContext()) {
 
@@ -36,11 +36,9 @@ public interface WebViewClientImpl extends WebViewClientLoaderImpl {
                 webView.setTag(R.id.id_webviewplus_targeturl, webView.getUrl());
             }
 
-            Context context = webView.getContext().getApplicationContext();
-            int heightPixels = context.getResources().getDisplayMetrics().heightPixels;
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("file:///android_asset/netError.html?height=");
-            stringBuilder.append(heightPixels * 0.3f);
+            stringBuilder.append("file:///android_asset/");
+            stringBuilder.append(assetFileName);
 
             // 网络错误, 加载本地Html
             String localUrl = stringBuilder.toString();

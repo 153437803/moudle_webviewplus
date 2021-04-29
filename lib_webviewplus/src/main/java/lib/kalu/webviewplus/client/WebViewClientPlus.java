@@ -1,5 +1,6 @@
 package lib.kalu.webviewplus.client;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.view.KeyEvent;
@@ -94,7 +95,12 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         }
 
         // 加载错误本地静态资源
-        loadResourceFail(view);
+        if (null != view && view instanceof WebViewImpl) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            Context context = view.getContext().getApplicationContext();
+            String resourceName = webViewImpl.initAssetDefaultResourceName(context);
+            loadResourceFail(view, resourceName);
+        }
     }
 
     @Override
@@ -110,7 +116,12 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         }
 
         // 加载错误本地静态资源
-        loadResourceFail(view);
+        if (null != view && view instanceof WebViewImpl) {
+            WebViewImpl webViewImpl = (WebViewImpl) view;
+            Context context = view.getContext().getApplicationContext();
+            String resourceName = webViewImpl.initAssetDefaultResourceName(context);
+            loadResourceFail(view, resourceName);
+        }
     }
 
     @Override
