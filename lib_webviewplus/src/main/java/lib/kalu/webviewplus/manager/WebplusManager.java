@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import java.util.Stack;
 
+import lib.kalu.webviewplus.R;
 import lib.kalu.webviewplus.WebViewPlus;
 import lib.kalu.webviewplus.provider.WebplusProvider;
 import lib.kalu.webviewplus.util.LogUtil;
@@ -29,7 +30,9 @@ public final class WebplusManager {
             stringBuilder.append("file:///android_asset/");
             stringBuilder.append(resourceName);
 
-            webView.loadUrl(stringBuilder.toString());
+            String url = stringBuilder.toString();
+            webView.setTag(R.id.id_webplus_assets_url_init, url);
+            webView.loadUrl(url);
             LogUtil.log("WebplusManager", "WebplusManager => i = " + i + ", webview = " + webView);
             stack.push(webView);
         }

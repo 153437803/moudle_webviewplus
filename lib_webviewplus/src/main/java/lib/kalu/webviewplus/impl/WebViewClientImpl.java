@@ -31,8 +31,8 @@ public interface WebViewClientImpl extends WebViewClientLoaderImpl {
 
         if (null != webView && null != webView.getContext()) {
 
-            if (null == webView.getTag(R.id.id_webviewplus_targeturl) && null != webView.getUrl() && webView.getUrl().length() > 0 && webView.getUrl().startsWith("http")) {
-                webView.setTag(R.id.id_webviewplus_targeturl, webView.getUrl());
+            if (null == webView.getTag(R.id.id_webplus_assets_url_reload) && null != webView.getUrl() && webView.getUrl().length() > 0 && webView.getUrl().startsWith("http")) {
+                webView.setTag(R.id.id_webplus_assets_url_reload, webView.getUrl());
             }
 
             StringBuilder stringBuilder = new StringBuilder();

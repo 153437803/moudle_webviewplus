@@ -15,6 +15,12 @@ import lib.kalu.webviewplus.WebViewPlus;
 public class MainActivity extends AppCompatActivity {
 
     @Override
+    public void onBackPressed() {
+        WebViewLayout webViewLayout = findViewById(R.id.webview);
+        webViewLayout.onBackPressed(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

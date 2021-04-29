@@ -1,5 +1,6 @@
 package lib.kalu.webviewplus;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import lib.kalu.webviewplus.core.WebViewCore;
 import lib.kalu.webviewplus.manager.WebplusManager;
 import lib.kalu.webviewplus.util.LogUtil;
 
@@ -42,6 +44,16 @@ public final class WebViewLayout extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
         WebView webView = WebplusManager.pop(context.getApplicationContext());
         addView(webView);
+    }
+
+    public void onBackPressed(@NonNull Activity activity) {
+
+        View child = getChildAt(0);
+        if (null == child || !(child instanceof WebViewCore))
+            return;
+
+        WebViewCore webView = (WebViewCore) child;
+        webView.onBackPressed(activity);
     }
 
     public void loadUrl(@NonNull String url) {

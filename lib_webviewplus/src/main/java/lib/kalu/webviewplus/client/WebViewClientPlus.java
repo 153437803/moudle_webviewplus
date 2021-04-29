@@ -63,8 +63,8 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0 && url.startsWith("http") && null == view.getTag(R.id.id_webviewplus_status)) {
-            view.setTag(R.id.id_webviewplus_status, 1);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0 && url.startsWith("http") && null == view.getTag(R.id.id_webplus_status)) {
+            view.setTag(R.id.id_webplus_status, 1);
             WebViewImpl webViewImpl = (WebViewImpl) view;
             webViewImpl.onPageStarted(view, url);
         }
@@ -73,8 +73,8 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0 && url.startsWith("http") && null != view.getTag(R.id.id_webviewplus_status)) {
-            view.setTag(R.id.id_webviewplus_status, null);
+        if (null != view && view instanceof WebViewImpl && null != url && url.length() > 0 && url.startsWith("http") && null != view.getTag(R.id.id_webplus_status)) {
+            view.setTag(R.id.id_webplus_status, null);
             WebViewImpl webViewImpl = (WebViewImpl) view;
             webViewImpl.onPageFinished(view, url);
         }
@@ -88,8 +88,8 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         LogUtil.log("WebViewClientPlus", "onReceivedError1 => errorCode = " + errorCode + ", description = " + description);
 
         // 加载结束回调
-        if (null != view && view instanceof WebViewImpl && null != failingUrl && failingUrl.length() > 0 && failingUrl.startsWith("http") && null != view.getTag(R.id.id_webviewplus_status)) {
-            view.setTag(R.id.id_webviewplus_status, null);
+        if (null != view && view instanceof WebViewImpl && null != failingUrl && failingUrl.length() > 0 && failingUrl.startsWith("http") && null != view.getTag(R.id.id_webplus_status)) {
+            view.setTag(R.id.id_webplus_status, null);
             WebViewImpl webViewImpl = (WebViewImpl) view;
             webViewImpl.onPageFinished(view, failingUrl);
         }
@@ -108,8 +108,8 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         LogUtil.log("WebViewClientPlus", "onReceivedError2 => errorCode = " + error.getErrorCode() + ", description = " + error.getDescription());
 
         // 加载结束回调
-        if (null != view && view instanceof WebViewImpl && null != request.getUrl() && request.getUrl().toString().length() > 0 && request.getUrl().toString().startsWith("http") && null != view.getTag(R.id.id_webviewplus_status)) {
-            view.setTag(R.id.id_webviewplus_status, null);
+        if (null != view && view instanceof WebViewImpl && null != request.getUrl() && request.getUrl().toString().length() > 0 && request.getUrl().toString().startsWith("http") && null != view.getTag(R.id.id_webplus_status)) {
+            view.setTag(R.id.id_webplus_status, null);
             WebViewImpl webViewImpl = (WebViewImpl) view;
             webViewImpl.onPageFinished(view, request.getUrl().toString());
         }

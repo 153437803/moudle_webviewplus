@@ -1,6 +1,7 @@
 package lib.kalu.webviewplus.core;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
@@ -97,7 +98,7 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
             return false;
         }
 
-        Object tag = getTag(R.id.id_webviewplus_targeturl);
+        Object tag = getTag(R.id.id_webplus_assets_url_reload);
         if (null == tag) {
             LogUtil.log("WebViewCore", "reload => false");
             return false;
@@ -125,24 +126,6 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     }
 
     @Override
-    public boolean canGoBackOrForward(int steps) {
-//        return super.canGoBackOrForward(steps);
-        return canGoBack();
-    }
-
-    @Override
-    public boolean canGoBack() {
-        // 正常
-        if (null != getTag(R.id.id_webviewplus_initurl) && getTag(R.id.id_webviewplus_initurl).toString().equals(getUrl())) {
-            return false;
-        }
-        // 容错
-        else {
-            return super.canGoBack();
-        }
-    }
-
-    @Override
     public boolean canGoForward() {
         return super.canGoForward();
     }
@@ -163,7 +146,6 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     public void loadUrl(String url) {
         if (null == url || url.length() == 0)
             return;
-        setTag(R.id.id_webviewplus_initurl, url);
         super.loadUrl(url);
     }
 
@@ -171,7 +153,6 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     public void loadUrl(String url, Map<String, String> additionalHttpHeaders) {
         if (null == url || url.length() == 0)
             return;
-        setTag(R.id.id_webviewplus_initurl, url);
         super.loadUrl(url, additionalHttpHeaders);
     }
 
@@ -362,6 +343,36 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     public boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result) {
         LogUtil.log("WebViewCore", "onJsPrompt => url = " + url);
         return true;
+    }
+
+    @Override
+    public void onBackPressed(@NonNull Activity activity, boolean tryAgin) {
+
+        if (null == activity)
+            return;
+
+        // 判断initAssetDefaultInitResourceName
+        boolean canGoBack = canGoBack();
+        String initUrl = null;
+        if (null != getTag(R.id.id_webplus_assets_url_init)) {
+            initUrl = getTag(R.id.id_webplus_assets_url_init).toString();
+        }
+        String targetUrl = getUrl();
+        String resourceName = initAssetDefaultInitResourceName();
+        LogUtil.log("WebViewCore", "onBackPressed => tryAgin = " + tryAgin + ", canGoBack = " + canGoBack + ", targetUrl = " + targetUrl + ", initUrl = " + initUrl + ", resourceName = " + resourceName);
+
+        if (tryAgin && null != initUrl && initUrl.length() > 0 && initUrl.startsWith("file:///android_asset/") && initUrl.endsWith(resourceName)) {
+            activity.finish();
+        }
+        // 回退上一页
+        else if (canGoBack()) {
+            goBack();
+            onBackPressed(activity, true);
+        }
+        // 默认
+        else if (!tryAgin) {
+            activity.finish();
+        }
     }
 
     @Override

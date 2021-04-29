@@ -1,6 +1,6 @@
 package lib.kalu.webviewplus.impl;
 
-import android.content.Context;
+import android.app.Activity;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebView;
@@ -61,6 +61,12 @@ public interface WebViewImpl {
     boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result);
 
     /*****/
+
+    default void onBackPressed(@NonNull Activity activity){
+        onBackPressed(activity, false);
+    }
+
+    void onBackPressed(@NonNull Activity activity, boolean tryAgin);
 
     void loadJavascriptAssets(@NonNull String fliename);
 
