@@ -26,11 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        WebViewPlus webViewPlus = findViewById(R.id.webview);
-////        webViewPlus.loadUrl("http://umspos.caitc.cn/cajinfu-wx-web/#/index");
-//         webViewPlus.loadUrl("https://etrust.caitc.cn/etrust/hybrid/#/index");
+////        webViewPlus.loadUrl("https://juejin.cn/");
 
         WebViewLayout webViewLayout = findViewById(R.id.webview);
-        webViewLayout.loadUrl("https://etrust.caitc.cn/etrust/hybrid/#/index");
+        webViewLayout.loadUrl("https://juejin.cn/");
         webViewLayout.setOnWebStatusChangeListener(new WebViewPlus.OnWebStatusChangeListener() {
             @Override
             public void onPageStarted(@NonNull WebView view, @NonNull String url) {
