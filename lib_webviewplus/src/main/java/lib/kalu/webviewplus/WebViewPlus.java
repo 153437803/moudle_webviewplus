@@ -147,7 +147,7 @@ public final class WebViewPlus extends WebViewCore {
          *
          * @return
          */
-        boolean onJsTimeout();
+        void onJsTimeout();
 
         /**
          * js回调
@@ -158,7 +158,7 @@ public final class WebViewPlus extends WebViewCore {
          * @param result
          * @return
          */
-        boolean onJsBeforeUnload(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+        void onJsBeforeUnload(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
 
         /**
          * 提示框
@@ -169,7 +169,7 @@ public final class WebViewPlus extends WebViewCore {
          * @param result
          * @return
          */
-        boolean onJsAlert(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+        void onJsAlert(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
 
         /**
          * 确认框
@@ -180,7 +180,7 @@ public final class WebViewPlus extends WebViewCore {
          * @param result
          * @return
          */
-        boolean onJsConfirm(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
+        void onJsConfirm(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull JsResult result);
 
         /**
          * 输入框
@@ -192,7 +192,7 @@ public final class WebViewPlus extends WebViewCore {
          * @param result
          * @return
          */
-        boolean onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result);
+        void onJsPrompt(@NonNull WebView view, @NonNull String url, @NonNull String message, @NonNull String defaultValue, @NonNull JsPromptResult result);
     }
 
     /****************/
