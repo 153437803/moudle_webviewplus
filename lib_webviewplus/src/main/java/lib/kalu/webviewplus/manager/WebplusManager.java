@@ -23,7 +23,13 @@ public final class WebplusManager {
     private WebplusManager() {
         for (int i = 0; i < 4; i++) {
             WebViewPlus webView = new WebViewPlus(WebplusProvider.mWebplusContext);
-            webView.loadUrl("file:///android_asset/netInit.html");
+            String resourceName = webView.initAssetDefaultInitResourceName();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("file:///android_asset/");
+            stringBuilder.append(resourceName);
+
+            webView.loadUrl(stringBuilder.toString());
             LogUtil.log("WebplusManager", "WebplusManager => i = " + i + ", webview = " + webView);
             stack.push(webView);
         }
@@ -62,7 +68,7 @@ public final class WebplusManager {
             try {
                 ViewGroup viewGroup = (ViewGroup) webView.getParent();
                 viewGroup.removeView(webView);
-            }catch (Exception e){
+            } catch (Exception e) {
             }
         }
 
@@ -89,7 +95,7 @@ public final class WebplusManager {
             try {
                 ViewGroup viewGroup = (ViewGroup) webView.getParent();
                 viewGroup.removeView(webView);
-            }catch (Exception e){
+            } catch (Exception e) {
             }
         }
 

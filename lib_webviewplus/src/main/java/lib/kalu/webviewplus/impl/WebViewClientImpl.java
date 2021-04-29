@@ -1,6 +1,5 @@
 package lib.kalu.webviewplus.impl;
 
-import android.content.Context;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 

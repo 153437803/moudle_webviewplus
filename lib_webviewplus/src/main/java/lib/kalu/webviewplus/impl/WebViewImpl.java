@@ -8,6 +8,8 @@ import android.webkit.WebView;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
+import lib.kalu.webviewplus.provider.WebplusProvider;
+
 /**
  * description:
  * created by kalu on 2021-04-20
@@ -18,8 +20,12 @@ public interface WebViewImpl {
         return "android";
     }
 
-    default String initAssetDefaultResourceName(@NonNull Context context) {
-        int heightPixels = context.getResources().getDisplayMetrics().heightPixels;
+    default String initAssetDefaultInitResourceName() {
+        return "netInit.html";
+    }
+
+    default String initAssetDefaultFailResourceName() {
+        int heightPixels = WebplusProvider.mWebplusContext.getResources().getDisplayMetrics().heightPixels;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("netError.html?height=");
         stringBuilder.append(heightPixels * 0.3f);

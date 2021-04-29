@@ -97,8 +97,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         // 加载错误本地静态资源
         if (null != view && view instanceof WebViewImpl) {
             WebViewImpl webViewImpl = (WebViewImpl) view;
-            Context context = view.getContext().getApplicationContext();
-            String resourceName = webViewImpl.initAssetDefaultResourceName(context);
+            String resourceName = webViewImpl.initAssetDefaultFailResourceName();
             loadResourceFail(view, resourceName);
         }
     }
@@ -118,8 +117,7 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
         // 加载错误本地静态资源
         if (null != view && view instanceof WebViewImpl) {
             WebViewImpl webViewImpl = (WebViewImpl) view;
-            Context context = view.getContext().getApplicationContext();
-            String resourceName = webViewImpl.initAssetDefaultResourceName(context);
+            String resourceName = webViewImpl.initAssetDefaultFailResourceName();
             loadResourceFail(view, resourceName);
         }
     }
