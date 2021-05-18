@@ -29,11 +29,23 @@ import lib.kalu.webviewplus.util.MD5Util;
  */
 public class WebViewClientPlus extends WebViewClient implements WebViewClientImpl {
 
+    /**
+     * 如果遇到了重定向，或者点击了页面中的a标签实现页面跳转，那么会回调这个方法。可以说这个是WebView里面最重要的回调之一，后面WebView与Native页面交互一节将会详细介绍这个方法。
+     * @param view
+     * @param url
+     * @return
+     */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         return super.shouldOverrideUrlLoading(view, url);
     }
 
+    /**
+     * 如果遇到了重定向，或者点击了页面中的a标签实现页面跳转，那么会回调这个方法。可以说这个是WebView里面最重要的回调之一，后面WebView与Native页面交互一节将会详细介绍这个方法。
+     * @param view
+     * @param request
+     * @return
+     */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
         return super.shouldOverrideUrlLoading(view, request);
@@ -46,12 +58,24 @@ public class WebViewClientPlus extends WebViewClient implements WebViewClientImp
 
     /************/
 
+    /**
+     * 无论是普通的页面请求(使用GET/POST)，还是页面中的异步请求，或者页面中的资源请求，都会回调这个方法，给开发一次拦截请求的机会。在这个方法中，我们可以进行静态资源的拦截并使用缓存数据代替，也可以拦截页面，使用自己的网络框架来请求数据。包括后面介绍的WebView免流方案，也和此方法有关。
+     * @param view
+     * @param url
+     * @return
+     */
     @Nullable
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
         return loadResourceUrl(view, url);
     }
 
+    /**
+     * 无论是普通的页面请求(使用GET/POST)，还是页面中的异步请求，或者页面中的资源请求，都会回调这个方法，给开发一次拦截请求的机会。在这个方法中，我们可以进行静态资源的拦截并使用缓存数据代替，也可以拦截页面，使用自己的网络框架来请求数据。包括后面介绍的WebView免流方案，也和此方法有关。
+     * @param view
+     * @param request
+     * @return
+     */
     @Nullable
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {

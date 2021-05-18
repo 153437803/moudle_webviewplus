@@ -51,7 +51,7 @@ public final class WebplusManager {
 
         if (stack.size() == 0) {
             WebViewPlus webView = new WebViewPlus(context);
-            webView.loadUrl("file:///android_asset/netInit.html");
+            webView.loadUrl("file:///android_asset/WpsPlusNetInit.html");
             stack.push(webView);
         }
 

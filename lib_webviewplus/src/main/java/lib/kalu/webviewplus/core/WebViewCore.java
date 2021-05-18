@@ -386,6 +386,7 @@ public class WebViewCore extends WebView implements WebViewImpl, Handler.Callbac
     public void loadJavascriptString(@NonNull String jstring) {
         String javascript = JavascriptUtil.encode(jstring);
         loadDataWithBaseURL(null, javascript, "application/javascript", "utf-8", null);
+        // evaluateJavascript(javascript, callbacck);
     }
 
     @Override

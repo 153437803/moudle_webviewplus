@@ -21,13 +21,13 @@ public interface WebViewImpl {
     }
 
     default String initAssetDefaultInitResourceName() {
-        return "netInit.html";
+        return "WpsPlusNetInit.html";
     }
 
     default String initAssetDefaultFailResourceName() {
         int heightPixels = WebplusProvider.mWebplusContext.getResources().getDisplayMetrics().heightPixels;
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("netError.html?height=");
+        stringBuilder.append("WpsPlusNetError.html");
         stringBuilder.append(heightPixels * 0.3f);
         return stringBuilder.toString();
     }
