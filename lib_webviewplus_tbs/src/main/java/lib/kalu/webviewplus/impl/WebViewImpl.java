@@ -21,7 +21,7 @@ public interface WebViewImpl {
     }
 
     default String initAssetDefaultFailResourceName() {
-        int heightPixels = WebplusProvider.mWebplusContext.getResources().getDisplayMetrics().heightPixels;
+        int heightPixels = InitProvider.mWebplusContext.getResources().getDisplayMetrics().heightPixels;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("WpsPlusNetError.html");
         stringBuilder.append(heightPixels * 0.3f);

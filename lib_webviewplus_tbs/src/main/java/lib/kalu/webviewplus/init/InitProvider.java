@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import java.util.HashMap;
 
 import lib.kalu.webviewplus.manager.WebplusManager;
+import lib.kalu.webviewplus.util.LogUtil;
 
 /**
  * description: 默认初始化Webview, 加速启动Webview
