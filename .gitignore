@@ -4,3 +4,11 @@
 /app/build/
 /lib_webviewplus_tbs/build/
 /lib_webviewplus_android/build/
+/gradle/wrapper/.tmp/
+/gradle/wrapper/android/
+/gradle/wrapper/caches/
+/gradle/wrapper/daemon/
+/gradle/wrapper/jdks/
+/gradle/wrapper/native/
+/gradle/wrapper/wrapper/
+/gradle/wrapper/android.lock
