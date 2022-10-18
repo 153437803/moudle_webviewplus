@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="lib.kalu.webviewplus">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="false"
+        android:debuggable="false"
+        tools:ignore="HardcodedDebugMode">
+
+        <provider
+            android:name="lib.kalu.webviewplus.init.InitProvider"
+            android:authorities="${applicationId}.webplusprovider"
+            android:exported="false"
+            android:multiprocess="true" />
+
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt"/>
+
+    </application>
+
+</manifest>

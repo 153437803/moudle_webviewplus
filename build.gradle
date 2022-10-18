@@ -1,234 +1,24 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
-
-    // 编译: 2020-01-03
-    ext.plugin_gradle_version = '4.2.1'
-    ext.plugin_kotlin_version = '1.4.21'
-    ext.plugin_andresguard_version = "1.2.20"// 不要改动
-    ext.plugin_asm_version = "1.0.0"// 不要改动
-
-    // https://developer.android.google.cn/jetpack/androidx/versions
-    // 核心: 2020-01-03
-    ext.support_activity_version = '1.1.0'
-    ext.support_fragment_version = '1.2.5'
-    ext.support_annotation_version = "1.1.0"
-    ext.support_appcompat_version = '1.2.0'
-
-    // https://developer.android.google.cn/jetpack/androidx/versions
-    // 功能: 2020-01-03
-    ext.support_recycler_version = '1.2.0-beta01'
-    ext.support_cardview_version = "1.0.0"
-    ext.support_percentlayout_version = "1.0.0"
-    ext.support_viewpager2_version = "1.0.0"
-    ext.support_swiperefreshlayout_version = '1.1.0'
-    ext.support_localbroadcastmanager_version = "1.0.0"
-    ext.support_exifinterface_version = '1.3.2'
-    ext.support_transition_version = '1.3.1'
-    ext.support_multidex_version = "2.0.1"
-    ext.support_preference_version = '1.1.1'
-    ext.support_material_version = '1.2.1'
-    ext.support_coordinatorlayout_version = "1.1.0"
-    ext.support_constraintlayout_version = '2.0.4'
-
-    // 三方: 2020-01-03
-    ext.support_aspectjrt_version = '1.9.6' // 不要改动
-    ext.support_gson_version = '2.8.6' // 不要改动, 2.8.6编译错误
-    ext.support_glide_version = '4.11.0'
-    ext.support_autoservice_version = "1.0-rc4"
-    ext.support_leakcanary_version = "1.6.3"
-    ext.support_rxandroid_version = "3.0.0"
-    ext.support_rxjava_version = "3.0.3"
-    ext.support_retrofit_version = '2.9.0'
-    ext.support_okhttp_version = "4.9.0"
-    ext.support_okio_version = "2.9.0"
-    ext.support_autodispose_version = "2.0.0"
-    ext.support_updater_version = "1.0.2"
-
-
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
     }
-
     dependencies {
-        classpath "com.android.tools.build:gradle:${plugin_gradle_version}"
+        classpath 'com.android.tools.build:gradle:7.3.1'
     }
 }
 
 allprojects {
-
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
     }
-}
-
-ext {
-
-    // 常量
-    plugin = [
-            com_android_application: 'com.android.application',
-            com_android_library    : 'com.android.library',
-            java                   : 'java',
-            asm                    : 'asm',
-            andresguard            : 'AndResGuard',
-            kotlin_android         : 'kotlin-android',
-            kotlin_parcelize       : 'kotlin-parcelize',
-    ]
-
-    // 版本
-    android = [
-
-            applicationId         : "com.kalu.webviewplus",
-            compileSdkVersion     : 29,
-            buildToolsVersion     : "29.0.2",
-            minSdkVersion         : 23,
-            targetSdkVersion      : 29, // 28之后强制使用https, 否则报错, 或者networkSecurityConfig
-            versionCode           : 1,
-            versionName           : "1.0.0",
-
-            abiFilters            : "armeabi,x86", // armeabi-v7a,x86
-            ndkVersion            : "16.1.4479499", // 21.0.6113669
-            ndkPath               : "C:\\\\Users\\\\Administrator\\\\android-sdk\\\\ndk\\\\16.1.4479499",
-            compileOptionsEncoding: "UTF-8",
-
-    ]
-
-    // 配置
-    config = [
-
-            // ==> 配置文件, 需要确认
-
-            // 微信
-            wxKeyDev                       : "\"wx111\"",
-            wxKeyNet                       : "\"wx111\"",
-
-            // 友盟
-            umengAppKeyValue               : "\"um222\"",
-            umengAppSecretValue            : "\"um222\"",
-
-
-            // 需要确认
-            apiUrlDev                      : "\"1\"",
-            apiUrlNet                      : "\"1\"",
-
-            // 抓包
-            proxyDev                       : "false", // ==> 配置文件, 需要确认
-            proxyNet                       : "false", // ==> 配置文件, 需要确认
-
-            // 加密
-            aesDev                         : "false", // ==> 配置文件, 需要确认
-            aesNet                         : "false", // ==> 配置文件, 需要确认
-
-            // 日志
-            logDev                         : "false", // ==> 配置文件, 需要确认
-            logNet                         : "false", // ==> 配置文件, 需要确认
-
-            // 友盟统计
-            umengAnalyticsDev              : "false",   // 需要确认, Dev环境打开
-            umengAnalyticsNet              : "false",  // 需要确认, Net环境关闭
-
-            // <== 配置文件, 需要确认
-
-            ////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////
-
-            // ==> 配置文件, 不要改动
-
-            string                         : "String",
-            stringResources                : "string",
-            int                            : "int",
-            boolean                        : "boolean",
-
-            api                            : "api",
-            web                            : "web",
-            wxKey                          : "wxKey",
-            umengAppKey                    : "umengAppKey",
-            umengAppSecret                 : "umengAppSecret",
-            umengAnalytics                 : "isUmengAnalytics",
-
-            proxy                          : "isProxy",
-            aes                            : "isAes",
-            log                            : "isLog",
-
-            umengChannel                   : "umengChannel",
-            umengChannelCaitc              : "\"default\"",
-            umengChannelHuawei             : "\"huawei\"",
-            umengChannelTencent            : "\"tencent\"",
-
-//            appName                        : "module_string_app_name",
-//            appNameDev                     : "框架Debug",
-//            appNameNet                     : "框架",
-
-            moduleStringProcessPicture     : "module_string_process_picture",
-            moduleStringProcessPictureValue: ":picture",
-
-            moduleStringProcessHtml        : "module_string_process_html",
-            moduleStringProcessHtmlValue   : ":html",
-
-            moduleStringProcessMupdf       : "module_string_process_mupdf",
-            moduleStringProcessMupdfValue  : ":mupdf",
-
-            // 编译版本
-            versionNameSuffixNet           : "",
-            versionNameSuffixDev           : "", // "-debug",
-
-            // 编译包名
-            applicationIdSuffixNet         : "",
-            applicationIdSuffixDev         : "", // ".debug",
-
-            // <== 配置文件, 不要改动
-    ]
-
-    // 依赖
-    dependencies = [
-
-            // kotlin
-            "support_kotlin_jdk8"          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$plugin_kotlin_version",
-
-            // 核心: 2020-01-03
-            "support_activity"             : "androidx.activity:activity:$support_activity_version",
-            "support_fragment"             : "androidx.fragment:fragment:$support_fragment_version",
-            "support_annotation"           : "androidx.annotation:annotation:$support_annotation_version",
-            "support_appcompat"            : "androidx.appcompat:appcompat:$support_appcompat_version",
-
-            // 功能: 2020-01-03
-            "support_viewpager2"           : "androidx.viewpager2:viewpager2:$support_viewpager2_version",
-            "support_cardview"             : "androidx.cardview:cardview:$support_cardview_version",
-            "support_swiperefreshlayout"   : "androidx.swiperefreshlayout:swiperefreshlayout:$support_swiperefreshlayout_version",
-            "support_localbroadcastmanager": "androidx.localbroadcastmanager:localbroadcastmanager:$support_localbroadcastmanager_version",
-            "support_material"             : "com.google.android.material:material:$support_material_version",
-            "support_recyclerview"         : "androidx.recyclerview:recyclerview:$support_recycler_version",
-            "support_multidex"             : "androidx.multidex:multidex:$support_multidex_version",
-            "support_preference"           : "androidx.preference:preference:$support_preference_version",
-            "support_exifinterface"        : "androidx.exifinterface:exifinterface:$support_exifinterface_version",
-            "support_transition"           : "androidx.transition:transition:$support_transition_version",
-            "support_percentlayout"        : "androidx.percentlayout:percentlayout:$support_percentlayout_version",
-            "support_coordinatorlayout"    : "androidx.coordinatorlayout:coordinatorlayout:$support_coordinatorlayout_version",
-            "support_constraintlayout"     : "androidx.constraintlayout:constraintlayout:$support_constraintlayout_version",
-
-            // 三方: 2020-01-03
-            "retrofit_core"                : "com.squareup.retrofit2:retrofit:$support_retrofit_version",
-            "retrofit_converter"           : "com.squareup.retrofit2:converter-gson:$support_retrofit_version",
-            "rxandroid"                    : "io.reactivex.rxjava3:rxandroid:$support_rxandroid_version",
-            "rxjava"                       : "io.reactivex.rxjava3:rxjava:$support_rxjava_version",
-            "okio"                         : "com.squareup.okio:okio:$support_okio_version",
-            "okhttp"                       : "com.squareup.okhttp3:okhttp:$support_okhttp_version",
-            "autodispose"                  : "com.uber.autodispose2:autodispose-androidx-lifecycle:$support_autodispose_version",
-    ]
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType(Javadoc) {
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('encoding', 'UTF-8')
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }

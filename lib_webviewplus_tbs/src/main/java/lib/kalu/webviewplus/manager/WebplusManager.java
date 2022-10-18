@@ -2,24 +2,24 @@ package lib.kalu.webviewplus.manager;
 
 import android.content.Context;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
+
 
 import java.util.Stack;
 
 import lib.kalu.webviewplus.R;
 import lib.kalu.webviewplus.WebViewPlus;
-import lib.kalu.webviewplus.provider.WebplusProvider;
+import lib.kalu.webviewplus.init.InitProvider;
 import lib.kalu.webviewplus.util.LogUtil;
 
 /**
  * description:
  * created by kalu on 2021-04-26
  */
-public final class WebplusManager {
+public class WebplusManager {
 
-    private final static Stack<WebView> stack = new Stack<>();
+    private static Stack<com.tencent.smtt.sdk.WebView> stack = new Stack<>();
 
     private WebplusManager() {
         for (int i = 0; i < 4; i++) {
@@ -42,12 +42,12 @@ public final class WebplusManager {
         static WebplusManager WebplusManager = new WebplusManager();
     }
 
-    public final static void init() {
+    public static void init() {
         WebplusManager WebplusManager = Holder.WebplusManager;
         LogUtil.log("WebplusManager", "init => size = " + stack.size());
     }
 
-    public final static WebView pop(@NonNull Context context) {
+    public static com.tencent.smtt.sdk.WebView pop(@NonNull Context context) {
 
         if (stack.size() == 0) {
             WebViewPlus webView = new WebViewPlus(context);
@@ -55,7 +55,7 @@ public final class WebplusManager {
             stack.push(webView);
         }
 
-        WebView webView = stack.pop();
+        com.tencent.smtt.sdk.WebView webView = stack.pop();
 
         while (webView.canGoBack()) {
             webView.goBack();
@@ -79,7 +79,7 @@ public final class WebplusManager {
         return webView;
     }
 
-    public final static void push(@NonNull WebView webView) {
+    public static void push(@NonNull com.tencent.smtt.sdk.WebView webView) {
 
         if (null == webView)
             return;

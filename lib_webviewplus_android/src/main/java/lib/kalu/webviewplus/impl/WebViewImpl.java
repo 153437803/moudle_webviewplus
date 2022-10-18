@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
-import lib.kalu.webviewplus.provider.WebplusProvider;
+import lib.kalu.webviewplus.init.WebplusProvider;
 
 /**
  * description:

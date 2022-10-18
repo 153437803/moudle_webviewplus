@@ -12,7 +12,7 @@
 
 #
 #### 功能
-- [x] aar混淆配置
+- [x] 支持tbs
 - [x] webview 自动缓存 js、css、img
 - [x] webview 状态变化监听, onProgressChanged、onPageStarted、onPageFinished
 - [x] webview 自动初始化实例, 默认4个, 自动扩容回收复用

@@ -1,0 +1,44 @@
+package lib.kalu.webviewplus.impl;
+
+import androidx.annotation.NonNull;
+
+import lib.kalu.webviewplus.R;
+
+/**
+ * description: WebViewClient - Impl
+ * created by kalu on 2021-04-20
+ */
+public interface WebViewClientImpl extends WebViewClientLoaderImpl {
+
+    /**
+     * 加载网络资源
+     *
+     * @param view
+     * @param url
+     * @return
+     */
+    com.tencent.smtt.export.external.interfaces.WebResourceResponse loadResourceUrl(@NonNull com.tencent.smtt.sdk.WebView view, @NonNull String url);
+
+    /**
+     * 加载本地错误提示资源
+     *
+     * @param webView
+     */
+    default void loadResourceFail(@NonNull com.tencent.smtt.sdk.WebView webView, @NonNull String assetFileName) {
+
+        if (null != webView && null != webView.getContext()) {
+
+            if (null == webView.getTag(R.id.id_webplus_assets_url_reload) && null != webView.getUrl() && webView.getUrl().length() > 0 && webView.getUrl().startsWith("http")) {
+                webView.setTag(R.id.id_webplus_assets_url_reload, webView.getUrl());
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("file:///android_asset/");
+            stringBuilder.append(assetFileName);
+
+            // 网络错误, 加载本地Html
+            String localUrl = stringBuilder.toString();
+            webView.loadUrl(localUrl);
+        }
+    }
+}

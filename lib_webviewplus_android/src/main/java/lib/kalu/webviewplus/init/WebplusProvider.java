@@ -1,4 +1,4 @@
-package lib.kalu.webviewplus.provider;
+package lib.kalu.webviewplus.init;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络错误</title>
+</head>
+
+<body style="height: 100vh;">
+<img style="width: 90%;height: auto;margin-left: 5%;margin-top: 50%;" src="netError.png" alt="网络错误">
+<p
+        style="color: #666666;font-size: 16px;text-align: center;width: 100%;margin-top: -25%;margin-bottom: 15%;">
+    网络不给力，点击重新加载~</p>
+<div onclick="reload()"
+     style="font-size: 16px; height: 36px;line-height: 36px;width: 30%;text-align: center;border-radius: 15px;color: #B98E5B;border: 1px solid #B98E5B;margin-left: 50%;transform: translate(-50%,0);">
+    重新加载</div>
+<script>
+    function reload() {
+      window.android.reload();
+    }
+
+    function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) { return pair[1]; }
+      }
+      return (false);
+    }
+
+    var height = getQueryVariable("height");
+    var body = document.getElementsByTagName('body')[0];
+
+    if(height > 100) {
+      body.style.cssText='height: ' + height + 'px;margin:0;';
+    }
+  </script>
+</body>
+
+</html>

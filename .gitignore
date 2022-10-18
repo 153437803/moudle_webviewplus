@@ -1,7 +1,6 @@
 # Project exclude paths
+/.idea
 /.gradle/
 /app/build/
-/app/build/intermediates/javac/release/classes/
-/lib_webviewplus/build/
-/lib_webviewplus/build/intermediates/javac/release/classes/
-/.idea
+/lib_webviewplus_tbs/build/
+/lib_webviewplus_android/build/

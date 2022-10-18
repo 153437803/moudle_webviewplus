@@ -1,27 +1,15 @@
-apply plugin: rootProject.ext.plugin.com_android_application
+apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
-
-    compileOptions.encoding = rootProject.ext.android.compileOptionsEncoding
-    ndkPath rootProject.ext.android.ndkPath
-    ndkVersion rootProject.ext.android.ndkVersion
-
-    buildFeatures {
-        viewBinding true
-    }
+    compileSdkVersion 32
+    buildToolsVersion "32.0.0"
 
     defaultConfig {
-
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        vectorDrawables.useSupportLibrary = true
-
-        ndk {
-            abiFilters rootProject.ext.android.abiFilters.split(",")
-        }
+        applicationId "com.kalu.webviewplus"
+        minSdkVersion 16
+        targetSdkVersion 32
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -45,7 +33,6 @@ android {
 
     buildTypes {
         release {
-            useProguard true
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
@@ -54,7 +41,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard/proguard-rules.pro'
         }
         debug {
-            useProguard true
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
@@ -88,16 +74,9 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 
     // 模块依赖
     // implementation project(':lib_webviewplus')
     implementation(name: 'webviewplus_debug_20210429', ext: 'aar')
-
-    // 三方依赖
-    implementation rootProject.ext.dependencies.support_activity
-    implementation rootProject.ext.dependencies.support_fragment
-    implementation rootProject.ext.dependencies.support_annotation
-    implementation rootProject.ext.dependencies.support_appcompat
-    implementation rootProject.ext.dependencies.support_coordinatorlayout
-    implementation rootProject.ext.dependencies.support_constraintlayout
 }
