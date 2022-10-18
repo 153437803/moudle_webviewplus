@@ -23,7 +23,7 @@ public class WebplusManager {
 
     private WebplusManager() {
         for (int i = 0; i < 4; i++) {
-            WebViewPlus webView = new WebViewPlus(WebplusProvider.mWebplusContext);
+            WebViewPlus webView = new WebViewPlus(InitProvider.mWebplusContext);
             String resourceName = webView.initAssetDefaultInitResourceName();
 
             StringBuilder stringBuilder = new StringBuilder();

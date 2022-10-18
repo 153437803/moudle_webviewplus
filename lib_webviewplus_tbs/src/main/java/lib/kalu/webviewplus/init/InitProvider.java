@@ -22,7 +22,12 @@ import lib.kalu.webviewplus.util.LogUtil;
 @Keep
 public class InitProvider extends ContentProvider {
 
+    private static boolean mEnable = false;
     public static Context mWebplusContext;
+
+    public static final void setEnableCache(boolean enable) {
+        mEnable = enable;
+    }
 
     @Override
     public boolean onCreate() {
@@ -52,8 +57,10 @@ public class InitProvider extends ContentProvider {
         });
 
         // 2
-        mWebplusContext = getContext().getApplicationContext();
-        WebplusManager.init();
+        if (mEnable) {
+            mWebplusContext = getContext().getApplicationContext();
+            WebplusManager.init();
+        }
         return true;
     }
 
